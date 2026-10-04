@@ -37,6 +37,9 @@ function KeyNav({ route }: { route: Route }) {
               aria-current={route === k.to ? "page" : undefined}
               onClick={(e) => {
                 e.preventDefault();
+                if (k.to === "/projects" && route === "/projects") {
+                  window.dispatchEvent(new CustomEvent("vibrate-myprojects"));
+                }
                 navigate(k.to);
               }}
               onPointerDown={() => setPressed(i)}

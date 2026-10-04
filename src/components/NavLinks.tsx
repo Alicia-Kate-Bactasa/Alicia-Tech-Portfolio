@@ -18,6 +18,10 @@ export default function NavLinks() {
           aria-label={k.label}
           onClick={(e) => {
             e.preventDefault();
+            const currentRoute = window.location.hash.replace(/^#/, "") || "/";
+            if (k.to === "/projects" && currentRoute === "/projects") {
+              window.dispatchEvent(new CustomEvent("vibrate-myprojects"));
+            }
             navigate(k.to);
           }}
           className="absolute top-[32px] h-[105px] cursor-pointer rounded-[6px] transition-[background-color,transform] duration-100 hover:bg-white/15 active:translate-y-[3px] active:bg-black/10 focus-visible:outline-2 focus-visible:outline-[#0800ff]"
