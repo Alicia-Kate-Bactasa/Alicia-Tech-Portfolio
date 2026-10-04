@@ -169,6 +169,11 @@ body { font-family: "Poppins:Regular", sans-serif; overflow-x: hidden; }
   100% { opacity: 1; transform: translateX(0) scale(1); }
 }
 
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 .page-container .keycap-header-wrapper {
   display: none !important;
 }
