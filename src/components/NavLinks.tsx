@@ -1,4 +1,5 @@
 import { navigate, type Route } from "../router";
+import { playKeySound } from "../utils/keySound";
 
 const keys: { label: string; to: Route; left: number; width: number }[] = [
   { label: "Home", to: "/", left: 51, width: 112 },
@@ -11,11 +12,23 @@ const keys: { label: string; to: Route; left: number; width: number }[] = [
 export default function NavLinks() {
   return (
     <nav className="absolute left-0 top-0 z-50" aria-label="Main">
-      {keys.map((k) => (
+      {keys.map((k, idx) => (
         <a
           key={k.to}
           href={`#${k.to}`}
           aria-label={k.label}
+          onPointerDown={() => playKeySound(idx)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              playKeySound(idx);
+              const currentRoute = window.location.hash.replace(/^#/, "") || "/";
+              if (k.to === "/projects" && currentRoute === "/projects") {
+                window.dispatchEvent(new CustomEvent("vibrate-myprojects"));
+              }
+              navigate(k.to);
+            }
+          }}
           onClick={(e) => {
             e.preventDefault();
             const currentRoute = window.location.hash.replace(/^#/, "") || "/";

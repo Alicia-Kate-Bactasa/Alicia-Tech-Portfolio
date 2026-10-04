@@ -12,16 +12,16 @@ export default function WorkM() {
       <h1 className={`rotate-[0.29deg] font-['Poppins:Black'] text-[clamp(38px,12.5vw,84px)] font-normal leading-[1.1] tracking-[0.05em] ${c}`}>Work with Me!</h1>
 
       <div className="mt-[clamp(24px,7vw,48px)] flex w-full flex-col items-start gap-[18px] font-['Poppins:Regular'] text-[clamp(17px,5vw,32px)] tracking-[0.05em]">
-        <a href="mailto:bactasa.ak@gmail.com" target="_blank" rel="noreferrer" className={`group flex items-center gap-[12px] text-left font-['Poppins:SemiBold'] ${c}`}>
-          <img alt="" src={`${A}/c158a.svg`} className="w-[clamp(28px,8vw,40px)] shrink-0" />
-          <span className="[overflow-wrap:anywhere]">
+        <a href="mailto:bactasa.ak@gmail.com" target="_blank" rel="noreferrer" className={`group flex items-center gap-[12px] rounded-[8px] px-[6px] -mx-[6px] py-[4px] text-left font-['Poppins:SemiBold'] ${c} transition-colors duration-200 hover:bg-white/15 hover:text-[#0200ff]`}>
+          <img alt="" src={`${A}/c158a.svg`} className="w-[clamp(28px,8vw,40px)] shrink-0 transition-transform duration-200 group-hover:scale-105" />
+          <span className="[overflow-wrap:anywhere] transition-colors duration-200 group-hover:text-[#0200ff]">
             Email Me — <span className="font-['Poppins:Regular']">bactasa.ak@gmail.com</span>
           </span>
-          <img alt="" src={`${A}/bb561.svg`} className="hidden w-[34px] shrink-0 transition-transform group-hover:translate-x-2 sm:block" />
+          <img alt="" src={`${A}/bb561.svg`} className="hidden w-[34px] shrink-0 transition-transform duration-200 group-hover:translate-x-2 sm:block" />
         </a>
         {links.map((l) => (
-          <a key={l.name} href={l.href} target="_blank" rel="noreferrer" className={`flex items-center gap-[12px] text-left ${c}`}>
-            <img alt="" src={l.icon} className="w-[clamp(28px,8vw,40px)] shrink-0" />
+          <a key={l.name} href={l.href} target="_blank" rel="noreferrer" className={`group flex items-center gap-[12px] rounded-[8px] px-[4px] -mx-[4px] py-[2px] text-left ${c} underline-offset-4 transition-all duration-200 hover:bg-white/15 hover:text-[#0200ff] hover:decoration-2 hover:underline-offset-4 hover:translate-x-[2px]`}>
+            <img alt="" src={l.icon} className="w-[clamp(28px,8vw,40px)] shrink-0 transition-transform duration-200 group-hover:scale-105" />
             <span className="underline [overflow-wrap:anywhere]">{l.label}</span>
           </a>
         ))}

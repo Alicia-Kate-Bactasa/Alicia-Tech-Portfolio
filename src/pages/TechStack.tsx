@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NavLinks from "../components/NavLinks";
+import { playKeySound } from "../utils/keySound";
 const assetPathPrefix = "/assets";
 const imgHighlight = `${assetPathPrefix}/06200.png`;
 const imgShadow = `${assetPathPrefix}/e4ae9.svg`;
@@ -219,11 +220,11 @@ export default function TechStack() {
           </p>
         </div>
         <div className="absolute contents z-50">
-          <button className="absolute left-[51px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onMouseDown={() => setPressedKey(1)} onMouseUp={() => setPressedKey(null)} onMouseLeave={() => setPressedKey(null)} aria-label="Home" />
-          <button className="absolute left-[165px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onMouseDown={() => setPressedKey(2)} onMouseUp={() => setPressedKey(null)} onMouseLeave={() => setPressedKey(null)} aria-label="About Me" />
-          <button className="absolute left-[278px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onMouseDown={() => setPressedKey(3)} onMouseUp={() => setPressedKey(null)} onMouseLeave={() => setPressedKey(null)} aria-label="Featured Projects" />
-          <button className="absolute left-[391px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onMouseDown={() => setPressedKey(4)} onMouseUp={() => setPressedKey(null)} onMouseLeave={() => setPressedKey(null)} aria-label="Tech Stack" />
-          <button className="absolute left-[504px] top-[32px] w-[285px] h-[105px] cursor-pointer opacity-0" onMouseDown={() => setPressedKey(5)} onMouseUp={() => setPressedKey(null)} onMouseLeave={() => setPressedKey(null)} aria-label="Work with Me" />
+          <button className="absolute left-[51px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onPointerDown={() => { setPressedKey(1); playKeySound(0); }} onPointerUp={() => setPressedKey(null)} onPointerLeave={() => setPressedKey(null)} aria-label="Home" />
+          <button className="absolute left-[165px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onPointerDown={() => { setPressedKey(2); playKeySound(1); }} onPointerUp={() => setPressedKey(null)} onPointerLeave={() => setPressedKey(null)} aria-label="About Me" />
+          <button className="absolute left-[278px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onPointerDown={() => { setPressedKey(3); playKeySound(2); }} onPointerUp={() => setPressedKey(null)} onPointerLeave={() => setPressedKey(null)} aria-label="Featured Projects" />
+          <button className="absolute left-[391px] top-[32px] w-[112px] h-[105px] cursor-pointer opacity-0" onPointerDown={() => { setPressedKey(4); playKeySound(3); }} onPointerUp={() => setPressedKey(null)} onPointerLeave={() => setPressedKey(null)} aria-label="Tech Stack" />
+          <button className="absolute left-[504px] top-[32px] w-[285px] h-[105px] cursor-pointer opacity-0" onPointerDown={() => { setPressedKey(5); playKeySound(4); }} onPointerUp={() => setPressedKey(null)} onPointerLeave={() => setPressedKey(null)} aria-label="Work with Me" />
         </div>
       </div>
       </div>
