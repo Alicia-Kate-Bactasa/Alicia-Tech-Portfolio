@@ -483,7 +483,7 @@ export default function Projects() {
                   <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
                   <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
                 </div>
-                <p key={idx} className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[11px] mt-[15px] relative row-1 text-[32px] text-black w-[352px]" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }} data-node-id="1:45578">
+                <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[11px] mt-[15px] relative row-1 text-[32px] text-black w-[352px]" data-node-id="1:45578">
                   ({idx + 1}) {projects[idx].name}
                 </p>
               </div>
@@ -497,7 +497,7 @@ export default function Projects() {
                 <img alt="" className="block max-w-none size-full" src={imgBorderLines} />
               </div>
             </div>
-            <div key={idx} className="absolute left-[389px] top-[537px] flex items-center justify-start gap-[16px] w-[592px] overflow-hidden" data-name="Tech Stack Logos" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}>
+            <div className="absolute left-[389px] top-[537px] flex items-center justify-start gap-[16px] w-[592px] overflow-hidden" data-name="Tech Stack Logos">
               {projects[idx].tech.split(" · ").map(t => {
                 const icons: Record<string, string> = { "Next.js": "nextjs/nextjs-original", "TypeScript": "typescript/typescript-original", "Tailwind CSS": "tailwindcss/tailwindcss-original", "Node.js": "nodejs/nodejs-original", "PostgreSQL": "postgresql/postgresql-original", "React": "react/react-original", "Vite": "vitejs/vitejs-original", "C#": "csharp/csharp-original", "Vue.js": "vuejs/vuejs-original", "Express.js": "express/express-original", "React Native": "react/react-original", "Docker": "docker/docker-original", "Prisma ORM": "prisma/prisma-original", "Supabase": "supabase/supabase-original", "ASP.NET Core Web API": "dotnetcore/dotnetcore-original", "Entity Framework Core": "dotnetcore/dotnetcore-original", "Vue Router": "vuejs/vuejs-original" };
                 if (!icons[t]) return null;
@@ -508,7 +508,7 @@ export default function Projects() {
           </div>
           <div className="absolute bg-[#d9d9d9] h-[131px] left-[237px] top-[792px] w-[971px]" data-node-id="1:45618" />
           <div className="absolute bg-[#d9d9d9] h-[399px] left-[235px] top-[325px] w-[970px] -z-10" data-node-id="1:45619" />
-          <div key={`info-${idx}`} className="pointer-events-auto absolute left-[246px] top-[800px] w-[948px] h-[115px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-[16px] [&::-webkit-scrollbar-track]:bg-[#c3c3c3] [&::-webkit-scrollbar-track]:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5)] [&::-webkit-scrollbar-thumb]:bg-[#02007f] [&::-webkit-scrollbar-thumb]:shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.5),inset_2px_2px_0px_rgba(255,255,255,0.3)] z-10" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}>
+          <div className="pointer-events-auto absolute left-[246px] top-[800px] w-[948px] h-[115px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-[16px] [&::-webkit-scrollbar-track]:bg-[#c3c3c3] [&::-webkit-scrollbar-track]:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5)] [&::-webkit-scrollbar-thumb]:bg-[#02007f] [&::-webkit-scrollbar-thumb]:shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.5),inset_2px_2px_0px_rgba(255,255,255,0.3)] z-10">
             <p className="font-['Poppins:SemiBold'] text-[18px] text-black mb-[4px]">{projects[idx].tagline}</p>
             <p className="font-['Inter:Regular'] text-[14px] text-black whitespace-pre-wrap mb-[12px] leading-relaxed">
               {projects[idx].desc}
@@ -543,13 +543,12 @@ export default function Projects() {
             </div>
           </div>
           <div className="absolute left-[235px] top-[325px] w-[971px] h-[399px] overflow-hidden pointer-events-none" data-node-id="1:45630" data-name="Project Showcase Wrapper">
-            <div key={idx} className="group absolute inset-0 pointer-events-auto overflow-hidden">
+            <div className="group absolute inset-0 pointer-events-auto overflow-hidden">
               {projects[idx].image ? (
                 <img
                   src={projects[idx].image}
                   alt={projects[idx].name}
                   className="size-full object-cover object-top select-none transition-transform duration-300 group-hover:scale-[1.02]"
-                  style={{ animation: "fadein 0.25s ease-out forwards" }}
                 />
               ) : (
                 <div className="size-full flex items-center justify-center bg-white text-gray-300 font-['Poppins:Bold'] text-2xl">

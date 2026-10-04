@@ -191,38 +191,38 @@ export default function Work() {
             <p className="[word-break:break-word] font-['Poppins:Black'] h-[94.005px] leading-[100px] not-italic relative text-[64px] text-[rgba(8,0,255,0.74)] tracking-[3.2px] w-[565.73px]">Work with Me!</p>
           </div>
         </div>
-        <div className="absolute contents left-[499px] top-[389px]" data-node-id="1:45730">
-          <a href="https://github.com/Alicia-Kate-Bactasa" target="_blank" rel="noreferrer" className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Poppins:Regular'] h-[35px] leading-[normal] left-[552px] not-italic text-[32px] text-[rgba(8,0,255,0.74)] top-[389px] tracking-[1.6px] underline w-[402px]" data-node-id="1:45731">
+        <div className="absolute contents left-[499px] top-[389px] group/github" data-node-id="1:45730">
+          <a href="https://github.com/Alicia-Kate-Bactasa" target="_blank" rel="noreferrer" className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute cursor-pointer decoration-from-font decoration-solid font-['Poppins:Regular'] h-[35px] leading-[normal] left-[552px] not-italic text-[32px] text-[rgba(8,0,255,0.74)] top-[389px] tracking-[1.6px] underline w-[402px] transition-all duration-200 hover:bg-white/15 hover:text-[#0200ff] hover:decoration-2 hover:underline-offset-4 hover:translate-x-[2px] rounded-[6px] px-[4px] -mx-[4px]" data-node-id="1:45731">
             Alicia-Kate-Bactasa
           </a>
-          <div className="absolute inset-[38.09%_62.5%_58.01%_34.65%]" data-node-id="1:45732" data-name="Vector">
+          <div className="absolute inset-[38.09%_62.5%_58.01%_34.65%] pointer-events-none transition-transform duration-200 group-hover/github:translate-x-1 group-hover/github:scale-105" data-node-id="1:45732" data-name="Vector">
             <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
           </div>
         </div>
-        <div className="absolute contents left-[511px] top-[443px]" data-node-id="1:45733">
+        <div className="absolute contents left-[511px] top-[443px] group/linkedin" data-node-id="1:45733">
           <div className="absolute contents left-[511px] top-[443px]" data-node-id="1:45734">
-            <a href="https://www.linkedin.com/in/alicia-kate-bactasa" target="_blank" rel="noreferrer" className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Poppins:Regular'] h-[50px] leading-[normal] left-[564px] not-italic text-[32px] text-[rgba(8,0,255,0.74)] top-[443px] tracking-[1.6px] underline w-[357px]" data-node-id="1:45735">
+            <a href="https://www.linkedin.com/in/alicia-kate-bactasa" target="_blank" rel="noreferrer" className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute cursor-pointer decoration-from-font decoration-solid font-['Poppins:Regular'] h-[50px] leading-[normal] left-[564px] not-italic text-[32px] text-[rgba(8,0,255,0.74)] top-[443px] tracking-[1.6px] underline w-[357px] transition-all duration-200 hover:bg-white/15 hover:text-[#0200ff] hover:decoration-2 hover:underline-offset-4 hover:translate-x-[2px] rounded-[6px] px-[4px] -mx-[4px]" data-node-id="1:45735">
               Alicia Kate Bactasa
             </a>
-            <div className="absolute inset-[43.46%_61.67%_52.83%_35.49%]" data-node-id="1:45736" data-name="Vector">
+            <div className="absolute inset-[43.46%_61.67%_52.83%_35.49%] pointer-events-none transition-transform duration-200 group-hover/linkedin:translate-x-1 group-hover/linkedin:scale-105" data-node-id="1:45736" data-name="Vector">
               <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
             </div>
           </div>
         </div>
-        <div className="absolute contents left-[369px] top-[328px]" data-node-id="1:45737">
-          <a className="[word-break:break-word] absolute block font-['Poppins:SemiBold'] h-[41px] leading-[0] left-[424px] not-italic text-[0px] text-[rgba(8,0,255,0.74)] top-[328px] tracking-[1.6px] w-[691px]" href="mailto:bactasa.ak@gmail.com" data-node-id="1:45738" target="_blank">
-            <p className="cursor-pointer text-[32px]">
-              <span className="leading-[normal]">Email Me —</span>
-              <span className="[word-break:break-word] font-['Poppins:Regular'] leading-[normal] not-italic text-[rgba(8,0,255,0.74)]">{` ba`}</span>
-              <span className="[word-break:break-word] font-['Poppins:Regular'] leading-[normal] not-italic text-[rgba(8,0,255,0.74)]">ctasa.ak@gmail.com</span>
+        <div className="absolute contents left-[369px] top-[328px] group/email" data-node-id="1:45737">
+          <a className="[word-break:break-word] absolute block cursor-pointer font-['Poppins:SemiBold'] h-[41px] leading-[0] left-[424px] not-italic text-[0px] text-[rgba(8,0,255,0.74)] top-[328px] tracking-[1.6px] w-[691px] rounded-[8px] px-[6px] -mx-[6px] py-[4px] -my-[4px] transition-all duration-200 hover:bg-white/20 hover:text-[#0200ff] hover:translate-x-[2px] peer" href="mailto:bactasa.ak@gmail.com" data-node-id="1:45738" target="_blank">
+            <p className="text-[32px]">
+              <span className="leading-[normal] transition-colors duration-200 group-hover/email:text-[#0200ff]">Email Me —</span>
+              <span className="[word-break:break-word] font-['Poppins:Regular'] leading-[normal] not-italic transition-colors duration-200 group-hover/email:text-[#0200ff]">{` ba`}</span>
+              <span className="[word-break:break-word] font-['Poppins:Regular'] leading-[normal] not-italic transition-colors duration-200 group-hover/email:text-[#0200ff]">ctasa.ak@gmail.com</span>
             </p>
           </a>
-          <div className="absolute inset-[32.42%_71.81%_64.36%_25.62%]" data-node-id="1:45739" data-name="Vector">
+          <div className="absolute inset-[32.42%_71.81%_64.36%_25.62%] pointer-events-none transition-transform duration-200 group-hover/email:translate-x-1" data-node-id="1:45739" data-name="Vector">
             <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector2} />
           </div>
-        </div>
-        <div className="absolute h-[30px] left-[1060px] top-[339px] w-[34px]" data-node-id="1:45740" data-name="arrow-right 1">
-          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowRight1} />
+          <div className="absolute h-[30px] left-[1060px] top-[339px] w-[34px] pointer-events-none transition-transform duration-200 group-hover/email:translate-x-2 peer-hover:translate-x-2" data-node-id="1:45740" data-name="arrow-right 1">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowRight1} />
+          </div>
         </div>
       </div>
       <div className="absolute bg-[rgba(8,0,255,0.74)] h-[71px] left-[397px] rounded-[30px] top-[626px] w-[85px]" data-node-id="1:45742" />

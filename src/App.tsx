@@ -126,7 +126,8 @@ function Desktop() {
       }}
     >
       {/* Sliding full-screen pages: Each page fills 100vw x 100vh with zero fade */}
-      <div className="page-container absolute inset-0 w-full h-full overflow-hidden [&_.keycap-header-wrapper]:hidden">
+      <style>{`.page-container .keycap-header-wrapper{display:none !important}`}</style>
+      <div className="page-container absolute inset-0 w-full h-full overflow-hidden">
         {routes.map((r) => {
           const isCurrent = r === currentRoute;
           const isPrev = r === prevRoute;

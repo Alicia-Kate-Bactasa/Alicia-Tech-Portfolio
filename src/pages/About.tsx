@@ -227,45 +227,44 @@ export default function About() {
       </div>
       </div>
       <div className="absolute bg-[#f7f02e] h-[1178px] left-[906px] top-0 transition-colors duration-500 hover:bg-[#e6de10]" style={{ width: "calc(557px + var(--yellow-right-extend, 0px))" }} data-node-id="1:45504" />
-      <div className="[word-break:break-word] absolute contents font-['Poppins:Regular'] leading-[0] left-[860px] not-italic text-[20px] text-[rgba(8,0,255,0.75)] text-center top-[590px] tracking-[1px] [&_p]:transition-colors [&_p]:duration-300 hover:[&_p]:text-[#d4d422]" data-node-id="1:45505" data-name="RC">
-        <p className="-translate-x-1/2 absolute h-[33.319px] left-[1170.5px] top-[590px] w-[375px]" data-node-id="1:45506">
-          <span className="font-['Poppins:Bold'] leading-[normal]">|</span>
-          <span className="leading-[normal]">{` Data Structures and Algorithms`}</span>
-        </p>
-        <p className="-translate-x-1/2 absolute h-[33.319px] left-[1162.5px] top-[623.32px] w-[375px]" data-node-id="1:45507">
-          <span className="font-['Poppins:Bold'] leading-[normal]">{`| `}</span>
-          <span className="leading-[normal]">Object Oriented Programming</span>
-        </p>
-        <p className="-translate-x-1/2 absolute h-[33.319px] left-[1126.5px] top-[656.64px] w-[375px]" data-node-id="1:45508">
-          <span className="font-['Poppins:Bold'] leading-[normal]">{`| `}</span>
-          <span className="leading-[normal]">Linux Operating System</span>
-        </p>
-        <p className="-translate-x-1/2 absolute h-[33.319px] left-[1138.5px] top-[689.96px] w-[375px]" data-node-id="1:45509">
-          <span className="font-['Poppins:Bold'] leading-[normal]">{`| `}</span>
-          <span className="leading-[normal]">Information Management</span>
-        </p>
-        <div className="absolute contents left-[860px] top-[721.06px]" data-node-id="1:45510" data-name="RC2">
-          <p className="-translate-x-1/2 absolute h-[38.754px] left-[1191.5px] top-[721.06px] w-[461px]" data-node-id="1:45511">
-            <span className="leading-[normal]">{` `}</span>
-            <span className="font-['Poppins:Bold'] leading-[normal]">{`| `}</span>
-            <span className="leading-[normal]">Information Assurance and Security</span>
+      <div className="absolute left-[906px] top-[590px] flex w-[calc(557px+var(--yellow-right-extend,0px))] justify-center px-[20px] font-['Poppins:Regular'] text-[20px] leading-[normal] tracking-[1px] text-[rgba(8,0,255,0.75)] [&_p]:transition-colors [&_p]:duration-300 hover:[&_p]:text-[#d4d422]" data-node-id="1:45505" data-name="RC">
+        <div className="flex w-fit max-w-full flex-col gap-[10px]">
+          <p className="text-left" data-node-id="1:45506">
+            <span className="font-['Poppins:Bold']">|</span>
+            <span>{` Data Structures and Algorithms`}</span>
           </p>
-          <p className="-translate-x-1/2 absolute h-[40.304px] left-[1157.5px] top-[751.04px] w-[461px]" data-node-id="1:45512">
-            <span className="font-['Poppins:Bold'] leading-[normal]">{`| `}</span>
-            <span className="leading-[normal]">Systems Analysis and Design</span>
+          <p className="text-left" data-node-id="1:45507">
+            <span className="font-['Poppins:Bold']">{`| `}</span>
+            <span>Object Oriented Programming</span>
           </p>
-          <p className="-translate-x-1/2 absolute h-[38.754px] left-[1099.5px] top-[782.27px] w-[461px]" data-node-id="1:45513">
-            <span className="font-['Poppins:Bold'] leading-[normal]">{`| `}</span>
-            <span className="leading-[normal]">Web Development</span>
+          <p className="text-left" data-node-id="1:45508">
+            <span className="font-['Poppins:Bold']">{`| `}</span>
+            <span>Linux Operating System</span>
           </p>
-          <p className="-translate-x-1/2 absolute h-[38.754px] left-[1090.5px] top-[812.25px] w-[461px]" data-node-id="1:45514">
-            <span className="font-['Poppins:Bold'] leading-[normal]">{`| `}</span>
-            <span className="leading-[normal]">Network Security</span>
+          <p className="text-left" data-node-id="1:45509">
+            <span className="font-['Poppins:Bold']">{`| `}</span>
+            <span>Information Management</span>
+          </p>
+          <p className="text-left" data-node-id="1:45511">
+            <span className="font-['Poppins:Bold']">{`| `}</span>
+            <span>Information Assurance and Security</span>
+          </p>
+          <p className="text-left" data-node-id="1:45512">
+            <span className="font-['Poppins:Bold']">{`| `}</span>
+            <span>Systems Analysis and Design</span>
+          </p>
+          <p className="text-left" data-node-id="1:45513">
+            <span className="font-['Poppins:Bold']">{`| `}</span>
+            <span>Web Development</span>
+          </p>
+          <p className="text-left" data-node-id="1:45514">
+            <span className="font-['Poppins:Bold']">{`| `}</span>
+            <span>Network Security</span>
           </p>
         </div>
       </div>
       <div className="absolute contents left-[329px] top-[63.23px]" data-node-id="1:45515" data-name="Avatar Information">
-        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[329px] not-italic text-[0px] text-[rgba(8,0,255,0.75)] text-justify top-[210px] tracking-[0.8px] w-[500px] transition-all duration-300 hover:text-[#d4d422] hover:scale-[1.02]" data-node-id="1:45516">
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[329px] not-italic text-[0px] text-[rgba(8,0,255,0.75)] text-justify top-[206px] tracking-[0.8px] w-[500px] transition-all duration-300 hover:text-[#d4d422] hover:scale-[1.02]" data-node-id="1:45516">
           <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">{`Hello! I am Alicia Kate Bactasa and I’m a third-year `}</span>
           <span className="font-['Poppins:Medium'] leading-[normal] text-[16px]">{`BS Information Technology `}</span>
           <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">student at th</span>
@@ -275,7 +274,7 @@ export default function About() {
           <span className="font-['Poppins:Medium'] leading-[normal] text-[16px]">{` back-end engineering, database development, and data analytics`}</span>
           <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">.</span>
         </p>
-        <p className="-translate-x-full [word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[143px] leading-[0] left-[820px] not-italic text-[0px] text-[rgba(8,0,255,0.75)] text-right top-[332px] tracking-[0.8px] w-[413px] transition-all duration-300 hover:text-[#d4d422] hover:scale-[1.02]" data-node-id="1:45517">
+        <p className="-translate-x-full [word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[143px] leading-[0] left-[820px] not-italic text-[0px] text-[rgba(8,0,255,0.75)] text-right top-[328px] tracking-[0.8px] w-[413px] transition-all duration-300 hover:text-[#d4d422] hover:scale-[1.02]" data-node-id="1:45517">
           <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">{`I enjoy turning ideas into functional, well-structured applications while continuously exploring new technologies. Most of my experience comes from `}</span>
           <span className="font-['Poppins:Medium'] leading-[normal] text-[16px]">hands-on projects, collaborative development, and building full-stack systems from the ground up.</span>
         </p>
@@ -324,27 +323,29 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className="[word-break:break-word] absolute contents font-['Poppins:Light'] leading-[0] left-[990px] not-italic text-[rgba(8,0,255,0.75)] text-[0px] top-[242px] tracking-[1px] [&_p]:transition-colors [&_p]:duration-300 hover:[&_p]:text-[#d4d422]" data-node-id="1:45527" data-name="Offered">
-          <p className="absolute left-[990px] top-[242px] w-[370px]" data-node-id="1:45528">
-            <span className="font-['Poppins:ExtraBold'] leading-[normal] text-[20px]">|</span>
-            <span className="leading-[normal] text-[20px]">{` Database Development`}</span>
+        <div className="absolute left-[906px] top-[242px] flex w-[calc(557px+var(--yellow-right-extend,0px))] justify-center px-[20px] font-['Poppins:Light'] text-[20px] leading-[normal] tracking-[1px] text-[rgba(8,0,255,0.75)] [&_p]:transition-colors [&_p]:duration-300 hover:[&_p]:text-[#d4d422]" data-node-id="1:45527" data-name="Offered">
+        <div className="flex w-fit max-w-full flex-col gap-[10px]">
+          <p className="text-left" data-node-id="1:45528">
+            <span className="font-['Poppins:ExtraBold']">|</span>
+            <span>{` Database Development`}</span>
           </p>
-          <p className="absolute left-[990px] top-[273px] w-[488px]" data-node-id="1:45529">
-            <span className="font-['Poppins:ExtraBold'] leading-[normal] text-[20px]">|</span>
-            <span className="leading-[normal] text-[20px]">{` Full-stack web & mobile applications`}</span>
+          <p className="text-left" data-node-id="1:45529">
+            <span className="font-['Poppins:ExtraBold']">|</span>
+            <span>{` Full-stack web & mobile applications`}</span>
           </p>
-          <p className="absolute left-[990px] top-[335px] w-[450px]" data-node-id="1:45530">
-            <span className="font-['Poppins:ExtraBold'] leading-[normal] text-[20px]">|</span>
-            <span className="leading-[normal] text-[20px]">{` Data analytics & backend architecture`}</span>
+          <p className="text-left" data-node-id="1:45531">
+            <span className="font-['Poppins:ExtraBold']">|</span>
+            <span>{` UI/UX design and functional testing`}</span>
           </p>
-          <p className="absolute left-[990px] top-[305px] w-[432px]" data-node-id="1:45531">
-            <span className="font-['Poppins:ExtraBold'] leading-[normal] text-[20px]">|</span>
-            <span className="leading-[normal] text-[20px]">{` UI/UX design and functional testing`}</span>
+          <p className="text-left" data-node-id="1:45530">
+            <span className="font-['Poppins:ExtraBold']">|</span>
+            <span>{` Data analytics & backend architecture`}</span>
           </p>
         </div>
       </div>
+      </div>
       <div role="link" tabIndex={0} onClick={() => setIsResumeOpen(true)} onKeyDown={(e) => e.key === "Enter" && setIsResumeOpen(true)} className="absolute contents left-[1302px] top-[847px] cursor-pointer group" data-node-id="1:45532" data-name="Resume">
-        <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Poppins:Medium'] h-[42.233px] leading-[15px] left-[1376.5px] not-italic text-[15px] text-center text-white top-[949.77px] tracking-[0.75px] w-[149px] transition-colors duration-300 group-hover:text-[#ff1607]" data-node-id="1:45533">
+        <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Poppins:Medium'] h-[42.233px] leading-[15px] left-[1376.5px] not-italic text-[15px] text-center text-white top-[949.77px] tracking-[0.75px] w-[149px] transition-colors duration-300 group-hover:text-[#ff1607] [-webkit-text-stroke:1px_black] [paint-order:stroke]" style={{ WebkitTextStroke: "1px black" }} data-node-id="1:45533">
           View Alicia’s Resume
         </p>
         <div className="absolute h-[85.874px] left-[1335.74px] top-[847px] w-[75.906px] transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-2" data-node-id="1:45534" data-name="text_line_pdf">
@@ -372,7 +373,7 @@ export default function About() {
             <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
             <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e,inset_4px_4px_0px_0px_#b1b1b1]" />
             <div className="relative bg-[#02007f] flex items-center justify-between mx-[4px] mt-[4px] px-[4px] py-[3px]">
-              <p className="font-['Pixelify_Sans:Regular'] text-[24px] text-white ml-[4px]">Resume.pdf</p>
+              <p className="font-['Pixelify_Sans:Regular'] text-[24px] text-white ml-[4px]">Bactasa-Resume.pdf</p>
               <div role="button" aria-label="Close" onClick={() => setIsResumeOpen(false)} className="contents cursor-pointer">
                 <div className="relative shrink-0 size-[24px]">
                   <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
@@ -396,11 +397,11 @@ export default function About() {
             <div className="relative p-[16px] flex flex-col items-center gap-[16px] mt-[4px]">
               <div className="w-full bg-white h-[400px] border border-black shadow-[inset_1px_1px_2px_rgba(0,0,0,0.5)] flex items-center justify-center p-[20px] overflow-hidden">
                 <div className="w-full h-full flex flex-col items-center justify-center">
-                  <iframe src="/resume.pdf#view=FitH" className="w-full h-full border-none" title="Resume Preview" />
+                  <iframe src="/bactasa-resume.pdf#view=FitH" className="w-full h-full border-none" title="Resume Preview" />
                 </div>
               </div>
               <button 
-                onClick={() => window.open("/resume.pdf", "_blank")}
+                onClick={() => window.open("/bactasa-resume.pdf", "_blank")}
                 className="relative px-[32px] py-[6px] font-['Pixelify_Sans:Regular'] text-[20px] cursor-pointer focus:outline-none focus:after:absolute focus:after:inset-[4px] focus:after:border focus:after:border-dotted focus:after:border-black active:pt-[8px] active:pb-[4px] active:pl-[34px] active:pr-[30px] active:[&>div:last-of-type]:shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]"
               >
                 <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
