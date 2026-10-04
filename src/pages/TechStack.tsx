@@ -63,7 +63,6 @@ export default function TechStack() {
             </div>
           </div>
           <div className="absolute bg-[rgba(255,255,255,0.01)] h-[50.19px] left-[15.48px] mix-blend-luminosity rounded-tl-[200px] rounded-tr-[200px] shadow-[0px_0px_200px_0px_rgba(38,38,38,0.15)] top-0 w-[808.038px]" data-node-id="1:45639" data-name="Shadow" />
-          <div className="absolute bg-[rgba(255,255,255,0.01)] h-[127.838px] left-[823.52px] mix-blend-luminosity rounded-br-[50px] rounded-tr-[50px] top-[21.85px] w-[27.484px]" data-node-id="1:45640" data-name="Shadow" />
           <div className="absolute flex h-[127.838px] items-center justify-center left-[-23px] mix-blend-color-dodge top-[21.85px] w-[38.478px]" data-node-id="1:45641">
             <div className="flex-none rotate-180">
               <div className="bg-[rgba(255,255,255,0.01)] h-[127.838px] relative rounded-br-[50px] rounded-tr-[50px] shadow-[0px_0px_150px_0px_rgba(255,255,255,0.5)] w-[38.478px]" data-name="Light" />
