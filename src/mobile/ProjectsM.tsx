@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { projects } from "../pages/Projects";
 import { bevel, bevelWin, sunken } from "./win";
 import { CloseGlyph, MinGlyph, PushButton, TitleBtn } from "./WinButton";
@@ -24,6 +24,61 @@ export default function ProjectsM() {
   const [dir, setDir] = useState(1);
   const [open, setOpen] = useState(true);
   const [alertOpen, setAlertOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const openRef = useRef(open);
+  const alertOpenRef = useRef(alertOpen);
+  const alertRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
+  useEffect(() => {
+    alertOpenRef.current = alertOpen;
+  }, [alertOpen]);
+
+  const triggerVibrate = useCallback(() => {
+    if (openRef.current) {
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try {
+          navigator.vibrate([100, 50, 100]);
+        } catch {}
+      }
+      if (sectionRef.current) {
+        sectionRef.current.classList.remove("animate-window-vibrate");
+        void sectionRef.current.offsetWidth;
+        sectionRef.current.classList.add("animate-window-vibrate");
+      }
+    } else {
+      setOpen(true);
+    }
+  }, []);
+
+  const triggerFolderVibrate = useCallback(() => {
+    if (alertOpenRef.current) {
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try {
+          navigator.vibrate([100, 50, 100]);
+        } catch {}
+      }
+      if (alertRef.current) {
+        alertRef.current.classList.remove("animate-window-vibrate");
+        void alertRef.current.offsetWidth;
+        alertRef.current.classList.add("animate-window-vibrate");
+      }
+    } else {
+      setAlertOpen(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleVibrateEvent = () => {
+      triggerVibrate();
+    };
+    window.addEventListener("vibrate-myprojects", handleVibrateEvent);
+    return () => window.removeEventListener("vibrate-myprojects", handleVibrateEvent);
+  }, [triggerVibrate]);
+
   const p = projects[idx];
   const n = projects.length;
   const step = (d: number) => {
@@ -36,15 +91,20 @@ export default function ProjectsM() {
     <main className="relative min-h-[calc(100svh-110px)] overflow-hidden bg-[#008080] bg-cover bg-center" style={{ backgroundImage: `url(${A}/385739.webp)` }}>
       <div className="relative mx-auto flex max-w-[900px] flex-col gap-[16px] px-[8px] pb-[32px] pt-[16px] sm:px-[20px]">
         <div className="flex gap-[12px]">
-          <DesktopItem label="My Projects" icon={`${A}/7a2df.png`} onClick={() => setOpen(true)} />
-          <DesktopItem label="My Folder" icon={`${A}/76962.png`} onClick={() => setAlertOpen(true)} />
+          <DesktopItem label="My Projects" icon={`${A}/7a2df.png`} onClick={triggerVibrate} />
+          <DesktopItem label="My Folder" icon={`${A}/76962.png`} onClick={triggerFolderVibrate} />
         </div>
 
         {open && (
-          <section className="relative bg-[#c3c3c3] p-[6px] pb-[10px]" aria-label="My Projects">
+          <section
+            ref={sectionRef}
+            onAnimationEnd={() => sectionRef.current?.classList.remove("animate-window-vibrate")}
+            className="relative bg-[#c3c3c3] p-[6px] pb-[10px]"
+            aria-label="My Projects"
+          >
             <div className={`pointer-events-none absolute inset-0 ${bevelWin}`} />
             <div className="relative flex items-center justify-between bg-[#02007f] py-[4px] pl-[8px] pr-[4px]">
-              <div className="flex min-w-0 items-center gap-[8px]">
+              <div className="flex min-w-0 items-center gap-[8px] cursor-pointer" onClick={triggerVibrate}>
                 <img alt="" src={`${A}/7a2df.png`} className="size-[26px] shrink-0 [image-rendering:pixelated]" />
                 <p className={`${font} truncate text-[clamp(20px,6vw,28px)] text-white`}>My Projects</p>
               </div>
@@ -70,19 +130,42 @@ export default function ProjectsM() {
               </p>
             </div>
 
-            <div className="relative mt-[6px] overflow-hidden bg-[#d9d9d9]">
-              <div className="pointer-events-none absolute inset-0 shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]" />
-              <div className="flex h-[clamp(170px,46vw,330px)] items-center gap-[clamp(6px,2vw,16px)] overflow-hidden p-[clamp(8px,2.5vw,20px)]">
-                <div key={`l${idx}`} style={anim(dir)} className="flex h-[82%] w-[clamp(28px,9vw,80px)] shrink-0 items-center justify-center overflow-hidden rounded-sm bg-white shadow-md">
-                  <span className={`${font} -rotate-90 whitespace-nowrap text-[clamp(14px,3.6vw,24px)] text-gray-300 select-none`}>{projects[(idx - 1 + n) % n].name}</span>
-                </div>
-                <div key={`c${idx}`} style={anim(dir)} className="flex h-full min-w-0 flex-1 items-center justify-center overflow-hidden rounded-sm bg-white shadow-xl">
-                  <span className="px-[8px] text-center font-['Poppins:Bold'] text-[clamp(14px,4vw,24px)] text-gray-200">[ Image Placeholder ]</span>
-                </div>
-                <div key={`r${idx}`} style={anim(dir)} className="flex h-[82%] w-[clamp(28px,9vw,80px)] shrink-0 items-center justify-center overflow-hidden rounded-sm bg-white shadow-md">
-                  <span className={`${font} rotate-90 whitespace-nowrap text-[clamp(14px,3.6vw,24px)] text-gray-300 select-none`}>{projects[(idx + 1) % n].name}</span>
+            <div className="group relative mt-[6px] overflow-hidden bg-[#d9d9d9]">
+              <div className="relative h-[clamp(190px,50vw,340px)] w-full overflow-hidden">
+                {p.image ? (
+                  <img
+                    key={idx}
+                    src={p.image}
+                    alt={p.name}
+                    className="size-full object-cover object-top select-none"
+                    style={{ animation: "fadein 0.25s ease-out forwards" }}
+                  />
+                ) : (
+                  <span className="flex size-full items-center justify-center font-['Poppins:Bold'] text-[clamp(14px,4vw,24px)] text-gray-400">[ Image Placeholder ]</span>
+                )}
+                {/* Minimalist Blue Overlay */}
+                <div className="absolute inset-0 z-10 flex flex-col sm:flex-row items-center justify-center gap-[8px] bg-[#02007f]/70 backdrop-blur-[2px] opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100">
+                  <a
+                    href={p.live || p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-[12px] py-[5px] bg-white text-[#02007f] font-['Pixelify_Sans:Regular'] text-[15px] shadow-sm flex items-center gap-[5px] active:scale-95 transition-transform"
+                  >
+                    <span>View Live Website</span>
+                    <span className="text-[12px]">↗</span>
+                  </a>
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-[12px] py-[5px] bg-black/40 border border-white/70 text-white font-['Pixelify_Sans:Regular'] text-[15px] shadow-sm backdrop-blur-sm flex items-center gap-[5px] active:scale-95 transition-transform"
+                  >
+                    <span>View Repository</span>
+                    <span className="text-[12px]">↗</span>
+                  </a>
                 </div>
               </div>
+              <div className="pointer-events-none absolute inset-0 z-20 shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]" />
             </div>
 
             <div className="relative mt-[8px] flex items-center justify-between gap-[8px]">
@@ -127,7 +210,14 @@ export default function ProjectsM() {
 
       {alertOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-[12px]" onClick={() => setAlertOpen(false)}>
-          <div role="alertdialog" aria-label="Error" onClick={(e) => e.stopPropagation()} className="relative w-full max-w-[480px] bg-[#c3c3c3] shadow-[2px_2px_0px_0px_#000000]">
+          <div 
+            ref={alertRef}
+            onAnimationEnd={() => alertRef.current?.classList.remove("animate-window-vibrate")}
+            role="alertdialog" 
+            aria-label="Error" 
+            onClick={(e) => e.stopPropagation()} 
+            className="relative w-full max-w-[480px] bg-[#c3c3c3] shadow-[2px_2px_0px_0px_#000000]"
+          >
             <div className={`pointer-events-none absolute inset-0 ${bevelWin}`} />
             <div className="relative mx-[4px] mt-[4px] flex items-center justify-between bg-[#02007f] px-[4px] py-[3px]">
               <p className={`${font} ml-[4px] text-[22px] text-white`}>Error</p>

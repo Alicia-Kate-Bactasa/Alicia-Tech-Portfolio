@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import NavLinks from "../components/NavLinks";
 const assetPathPrefix = "/assets";
 const imgDocumentsFolder11 = `${assetPathPrefix}/76962.png`;
 const imgComputerWithPrograms11 = `${assetPathPrefix}/7a2df.png`;
-const imgIconicBg = `${assetPathPrefix}/385739.webp`;
 const imgHighlight = `${assetPathPrefix}/06200.png`;
 const imgShadow = `${assetPathPrefix}/e4ae9.svg`;
 const imgCase = `${assetPathPrefix}/875a6.svg`;
@@ -84,9 +83,22 @@ function SmallIconButton({ className }: { className?: string }) {
   );
 }
 
-export const projects = [
+export type Project = {
+  name: string;
+  image?: string;
+  live?: string;
+  github: string;
+  tagline: string;
+  desc: string;
+  features: string;
+  integrations: string;
+  tech: string;
+};
+
+export const projects: Project[] = [
   {
     name: "Dimetrix",
+    image: "/projects/Dimetrix.png",
     github: "https://github.com/Alicia-Kate-Bactasa/Dimetrix",
     tagline: "Power Outage Mapping & Analytics Platform",
     desc: "Dimetrix is a web-based geographic incident monitoring platform designed to visualize and track power outages, exploded transformers, scheduled brownouts, and other electrical disruptions. Instead of relying on scattered announcements and social media reports, users can access a centralized interactive map showing affected locations and the current status of reported incidents.\n\nBeyond mapping incidents, Dimetrix transforms outage reports into meaningful statistics and visual insights. Users and decision-makers can identify frequently affected areas, analyze recurring incidents, monitor outage trends, and better understand patterns in electrical disruptions over time.",
@@ -96,6 +108,7 @@ export const projects = [
   },
   {
     name: "Caytori",
+    image: "/projects/caytori.png",
     github: "https://github.com/Alicia-Kate-Bactasa/Caytori",
     tagline: "Multi-Company IT Support & Ticketing Platform",
     desc: "Caytori is a multi-company web application designed to centralize and streamline IT support workflows. Instead of employees reporting technical problems through scattered emails, messaging applications, and verbal requests, Caytori provides a structured ticketing system where issues can be submitted, prioritized, assigned, tracked, and resolved.\n\nThe platform supports separate company workspaces while giving IT teams and administrators the tools to monitor ticket activity and support performance. Analytics can provide insights into ticket volume, resolution times, recurring technical issues, and overall IT service efficiency.",
@@ -105,6 +118,7 @@ export const projects = [
   },
   {
     name: "AbyssalFlow",
+    image: "/projects/AbyssalFlow.png",
     github: "https://github.com/Alicia-Kate-Bactasa/Abyssal-Flow",
     tagline: "Immersive Menstrual Cycle Tracking Mobile Application",
     desc: "AbyssalFlow is a mobile application that reimagines traditional menstrual cycle tracking through an immersive ocean-inspired experience. Rather than presenting cycle information through a purely clinical interface, the application uses changing tides, underwater environments, and dynamic visual states to represent different phases of the menstrual cycle.\n\nUsers can track their cycle, symptoms, moods, and personal patterns while receiving predictions and reminders. The visual environment can adapt based on the user's current cycle phase, creating a more personal and engaging approach to health tracking.",
@@ -114,6 +128,7 @@ export const projects = [
   },
   {
     name: "Noir Detailing",
+    image: "/projects/NoirDetailing.png",
     github: "https://github.com/Alicia-Kate-Bactasa/Carwash-Booking-System",
     tagline: "Carwash Booking & Subscription Management System",
     desc: "Noir Detailing is a carwash booking and management platform that supports both one-time service appointments and subscription-based memberships. Customers can select detailing services, register their vehicles, choose available schedules, and manage bookings through a centralized system.\n\nThe platform also helps administrators manage appointment schedules, service capacity, customer records, subscriptions, and booking activity. Business rules such as available operating hours, bay allocation, and booking limits can be integrated into the scheduling system to prevent overbooking.",
@@ -123,6 +138,7 @@ export const projects = [
   },
   {
     name: "Lumen",
+    image: "/projects/lumen.png",
     github: "https://github.com/Alicia-Kate-Bactasa/Lumen",
     tagline: "Matcha & Hojicha E-Commerce Platform",
     desc: "Lumen is a specialty tea e-commerce platform offering matcha, hojicha powders, tea accessories, and branded merchandise. Customers can browse products, compare flavor profiles and grades, manage their cart, and place orders through a streamlined online storefront.\n\nBeyond traditional e-commerce, Lumen features a tea preference quiz that recommends products based on predefined preferences such as flavor, intensity, preparation method, and experience level. The platform also provides product information and preparation guides to help customers better understand and enjoy their tea.",
@@ -132,6 +148,7 @@ export const projects = [
   },
   {
     name: "DriveGo",
+    image: "/projects/DriveGo.png",
     github: "https://github.com/Alicia-Kate-Bactasa/DriveGo",
     tagline: "Centralized Donation Drive Discovery Platform",
     desc: "DriveGo is a centralized platform designed to make donation drives easier to discover, access, and manage. Instead of campaigns being scattered across different social media platforms, messaging applications, and organization pages, DriveGo provides a single system where organizations can publish and manage donation campaigns. Users can explore active donation drives, view campaign details and accepted donation requirements, discover nearby initiatives, and follow updates from organizers. The platform can also provide campaign statistics and progress tracking to make donation efforts more transparent and accessible.",
@@ -141,6 +158,7 @@ export const projects = [
   },
   {
     name: "Exec-Space",
+    image: "/projects/exec-space.png",
     github: "https://github.com/Alicia-Kate-Bactasa/Exec-Space",
     tagline: "Browser-Based Multi-Language Code Execution Environment",
     desc: "Exec-Space is a browser-based coding environment that allows users to write, compile, and execute programs directly from their browser. The platform supports multiple programming languages, such as C, C++, and JavaScript, allowing users to experiment with code without configuring a local development environment.\n\nUsers can select a language, write code using an interactive editor, provide standard input, execute their program, and view output or compiler errors. The system can also support saved projects and execution history, making it useful as both a coding workspace and learning environment.",
@@ -155,15 +173,67 @@ export default function Projects() {
   const [dir, setDir] = useState(1);
   const [open, setOpen] = useState(true);
   const [alertOpen, setAlertOpen] = useState(false);
+  const windowRef = useRef<HTMLDivElement>(null);
+  const openRef = useRef(open);
+  const alertOpenRef = useRef(alertOpen);
+  const alertWindowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
+  useEffect(() => {
+    alertOpenRef.current = alertOpen;
+  }, [alertOpen]);
+
+  const triggerVibrate = useCallback(() => {
+    if (openRef.current) {
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try {
+          navigator.vibrate([100, 50, 100]);
+        } catch {}
+      }
+      if (windowRef.current) {
+        windowRef.current.classList.remove("animate-window-vibrate");
+        void windowRef.current.offsetWidth;
+        windowRef.current.classList.add("animate-window-vibrate");
+      }
+    } else {
+      setOpen(true);
+    }
+  }, []);
+
+  const triggerFolderVibrate = useCallback(() => {
+    if (alertOpenRef.current) {
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try {
+          navigator.vibrate([100, 50, 100]);
+        } catch {}
+      }
+      if (alertWindowRef.current) {
+        alertWindowRef.current.classList.remove("animate-window-vibrate");
+        void alertWindowRef.current.offsetWidth;
+        alertWindowRef.current.classList.add("animate-window-vibrate");
+      }
+    } else {
+      setAlertOpen(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleVibrateEvent = () => {
+      triggerVibrate();
+    };
+    window.addEventListener("vibrate-myprojects", handleVibrateEvent);
+    return () => window.removeEventListener("vibrate-myprojects", handleVibrateEvent);
+  }, [triggerVibrate]);
+
   const step = (d: number) => {
     setDir(d);
     setIdx((i) => (i + d + projects.length) % projects.length);
   };
   return (
     <div className="relative w-[1440px] h-[1024px] overflow-visible bg-transparent" data-node-id="1:45540" data-name="Featured Projects">
-      <div className="absolute inset-0 -z-30 pointer-events-none" style={{ left: "calc(-1 * var(--screen-shift-left, 0px))", width: "calc(100% + 2 * var(--screen-shift-left, 0px))" }}>
-        <img alt="" src={imgIconicBg} className="size-full object-cover" />
-      </div>
       <div className="keycap-header-wrapper absolute left-0 top-0 z-30" style={{ transform: "translateX(var(--keycap-shift, 0px))" }}>
         <NavLinks />
         <div className="absolute contents left-[-23px] top-0" data-node-id="1:45542" data-name="Light Case">
@@ -174,7 +244,6 @@ export default function Projects() {
             </div>
           </div>
           <div className="absolute bg-[rgba(255,255,255,0.01)] h-[50.19px] left-[15.48px] mix-blend-luminosity rounded-tl-[200px] rounded-tr-[200px] shadow-[0px_0px_200px_0px_rgba(38,38,38,0.15)] top-0 w-[808.038px]" data-node-id="1:45545" data-name="Shadow" />
-          <div className="absolute bg-[rgba(255,255,255,0.01)] h-[127.838px] left-[823.52px] mix-blend-luminosity rounded-br-[50px] rounded-tr-[50px] top-[21.85px] w-[27.484px]" data-node-id="1:45546" data-name="Shadow" />
           <div className="absolute flex h-[127.838px] items-center justify-center left-[-23px] mix-blend-color-dodge top-[21.85px] w-[38.478px]" data-node-id="1:45547">
             <div className="flex-none rotate-180">
               <div className="bg-[rgba(255,255,255,0.01)] h-[127.838px] relative rounded-br-[50px] rounded-tr-[50px] shadow-[0px_0px_150px_0px_rgba(255,255,255,0.5)] w-[38.478px]" data-name="Light" />
@@ -332,121 +401,189 @@ export default function Projects() {
         </div>
       </div>
       </div>
-      {open && (<>
-      <div className="absolute h-[772px] left-[228px] top-[197px] w-[983px]" data-node-id="1:45565" data-name="Figma">
-        <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
-        <div className="absolute inset-[94px_7px_46px_5px] pointer-events-none" data-node-id="1:45566">
-          <div aria-hidden className="absolute bg-white inset-0" />
-          <div className="absolute inset-0 rounded-[inherit] shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]" />
-        </div>
-        <div className="absolute bg-[#02007f] content-stretch flex items-center justify-between left-[5px] pl-[8px] pr-[4px] py-[5px] right-[5px] top-[4px]" data-node-id="1:45567" data-name="Component 3">
-          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:45567;61:4318">
-            <div className="col-1 ml-0 mt-0 relative row-1 size-[32px]" data-node-id="I1:45567;61:4319" data-name="Small Icons">
-              <div className="absolute left-0 size-[32px] top-0" data-node-id="I1:45567;61:4319;35:331" data-name="Computer with programs-1 1">
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <img alt="" className="absolute left-[-1.55%] max-w-none size-full top-[9.45%]" src={imgComputerWithPrograms11} />
+      {open && (
+        <div
+          ref={windowRef}
+          onAnimationEnd={() => windowRef.current?.classList.remove("animate-window-vibrate")}
+          className="absolute inset-0 pointer-events-none z-10"
+        >
+          <div className="pointer-events-auto absolute h-[772px] left-[228px] top-[197px] w-[983px]" data-node-id="1:45565" data-name="Figma">
+            <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
+            <div className="absolute inset-[94px_7px_46px_5px] pointer-events-none" data-node-id="1:45566">
+              <div aria-hidden className="absolute bg-white inset-0" />
+              <div className="absolute inset-0 rounded-[inherit] shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]" />
+            </div>
+            <div className="absolute bg-[#02007f] content-stretch flex items-center justify-between left-[5px] pl-[8px] pr-[4px] py-[5px] right-[5px] top-[4px]" data-node-id="1:45567" data-name="Component 3">
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={triggerVibrate}
+                className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 cursor-pointer"
+                data-node-id="I1:45567;61:4318"
+              >
+                <div className="col-1 ml-0 mt-0 relative row-1 size-[32px]" data-node-id="I1:45567;61:4319" data-name="Small Icons">
+                  <div className="absolute left-0 size-[32px] top-0" data-node-id="I1:45567;61:4319;35:331" data-name="Computer with programs-1 1">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                      <img alt="" className="absolute left-[-1.55%] max-w-none size-full top-[9.45%]" src={imgComputerWithPrograms11} />
+                    </div>
+                  </div>
                 </div>
+                <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[38px] mt-[2px] relative row-1 text-[30px] text-white whitespace-nowrap" data-node-id="I1:45567;61:4320">
+                  My Projects
+                </p>
+              </div>
+              <div className="content-stretch flex gap-[4px] items-center justify-end relative shrink-0" data-node-id="I1:45567;61:4321">
+                <div role="button" aria-label="Minimize" onClick={() => setOpen(false)} className="relative shrink-0 size-[32px] cursor-pointer" data-node-id="I1:45567;61:4322" data-name="Small Icon Button">
+                  <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
+                  <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e]" />
+                  <div className="absolute bottom-1/4 left-[21.88%] overflow-clip right-1/4 top-[21.88%]" data-node-id="I1:45567;61:4322;22:16" data-name="Utility Icons">
+                    <div className="absolute contents left-px top-[14px]" data-node-id="I1:45567;61:4322;22:16;40:64">
+                      <div className="absolute bg-black h-[2px] left-px top-[14px] w-[15px]" data-node-id="I1:45567;61:4322;22:16;40:65" />
+                    </div>
+                  </div>
+                </div>
+                <div role="button" aria-label="Close" onClick={() => setOpen(false)} className="contents cursor-pointer"><SmallIconButton className="relative shrink-0 size-[32px]" /></div>
               </div>
             </div>
-            <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[38px] mt-[2px] relative row-1 text-[30px] text-white whitespace-nowrap" data-node-id="I1:45567;61:4320">
-              My Projects
-            </p>
-          </div>
-          <div className="content-stretch flex gap-[4px] items-center justify-end relative shrink-0" data-node-id="I1:45567;61:4321">
-            <div role="button" aria-label="Minimize" onClick={() => setOpen(false)} className="relative shrink-0 size-[32px] cursor-pointer" data-node-id="I1:45567;61:4322" data-name="Small Icon Button">
-              <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
-              <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e]" />
-              <div className="absolute bottom-1/4 left-[21.88%] overflow-clip right-1/4 top-[21.88%]" data-node-id="I1:45567;61:4322;22:16" data-name="Utility Icons">
-                <div className="absolute contents left-px top-[14px]" data-node-id="I1:45567;61:4322;22:16;40:64">
-                  <div className="absolute bg-black h-[2px] left-px top-[14px] w-[15px]" data-node-id="I1:45567;61:4322;22:16;40:65" />
-                </div>
+            <div className="absolute h-[46px] left-0 top-[50px] w-[232px]" data-node-id="1:45568" data-name="Panel Menu">
+              <div className="[word-break:break-word] absolute bottom-[21.74%] content-stretch flex font-['Pixelify_Sans:Regular'] font-normal gap-[32px] items-start left-[16px] text-[26px] text-black top-[21.74%] whitespace-nowrap" data-node-id="I1:45568;61:5140">
+                <p className="leading-[0] relative shrink-0 cursor-pointer hover:bg-[#02007f] hover:text-white" onClick={() => window.open(projects[idx].github, "_blank")} data-node-id="I1:45568;61:5118">
+                  <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">V</span>
+                  <span className="leading-[26px]">iew Live Website</span>
+                </p>
+                <p className="leading-[0] relative shrink-0 cursor-pointer hover:bg-[#02007f] hover:text-white" onClick={() => window.open(projects[idx].github, "_blank")} data-node-id="I1:45568;61:5124">
+                  <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">V</span>
+                  <span className="leading-[26px]">iew Github</span>
+                </p>
+                <p className="leading-[26px] relative shrink-0" data-node-id="I1:45568;61:5134">
+                  ​
+                </p>
               </div>
             </div>
-            <div role="button" aria-label="Close" onClick={() => setOpen(false)} className="contents cursor-pointer"><SmallIconButton className="relative shrink-0 size-[32px]" /></div>
-          </div>
-        </div>
-        <div className="absolute h-[46px] left-0 top-[50px] w-[232px]" data-node-id="1:45568" data-name="Panel Menu">
-          <div className="[word-break:break-word] absolute bottom-[21.74%] content-stretch flex font-['Pixelify_Sans:Regular'] font-normal gap-[32px] items-start left-[16px] text-[26px] text-black top-[21.74%] whitespace-nowrap" data-node-id="I1:45568;61:5140">
-            <p className="leading-[0] relative shrink-0 cursor-pointer hover:bg-[#02007f] hover:text-white" onClick={() => window.open(projects[idx].github, "_blank")} data-node-id="I1:45568;61:5118">
-              <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">V</span>
-              <span className="leading-[26px]">iew Live Website</span>
+            <p onClick={() => step(1)} className="cursor-pointer [word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal inset-[94.82%_1.93%_1.81%_90.74%] leading-[0] text-[30px] text-black whitespace-nowrap" data-node-id="1:45569">
+              <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">N</span>
+              <span className="leading-[26px]">ext</span>
             </p>
-            <p className="leading-[0] relative shrink-0 cursor-pointer hover:bg-[#02007f] hover:text-white" onClick={() => window.open(projects[idx].github, "_blank")} data-node-id="I1:45568;61:5124">
-              <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">V</span>
-              <span className="leading-[26px]">iew Github</span>
-            </p>
-            <p className="leading-[26px] relative shrink-0" data-node-id="I1:45568;61:5134">
-              ​
-            </p>
-          </div>
-        </div>
-        <p onClick={() => step(1)} className="cursor-pointer [word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal inset-[94.82%_1.93%_1.81%_90.74%] leading-[0] text-[30px] text-black whitespace-nowrap" data-node-id="1:45569">
-          <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">N</span>
-          <span className="leading-[26px]">ext</span>
-        </p>
-        <div className="absolute content-stretch flex h-[34px] items-center left-[9px] right-[5px] top-[98px]" data-node-id="1:45570">
-          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] mr-[-6px] place-items-start relative shrink-0" data-node-id="1:45571">
-            <div className="col-1 h-[34px] ml-0 mt-0 pointer-events-none relative row-1 w-[373px]" data-node-id="1:45572">
-              <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-              <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
+            <div className="absolute content-stretch flex h-[34px] items-center left-[9px] right-[5px] top-[98px]" data-node-id="1:45570">
+              <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] mr-[-6px] place-items-start relative shrink-0" data-node-id="1:45571">
+                <div className="col-1 h-[34px] ml-0 mt-0 pointer-events-none relative row-1 w-[373px]" data-node-id="1:45572">
+                  <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
+                  <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
+                </div>
+                <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[6px] mt-0 relative row-1 text-[22px] text-black w-[352px] whitespace-pre-wrap" data-node-id="1:45573">{`seven   featured project(s)`}</p>
+              </div>
+              <div className="h-[34px] pointer-events-none relative shrink-0 w-[605px]" data-node-id="1:45574">
+                <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
+                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
+              </div>
             </div>
-            <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[6px] mt-0 relative row-1 text-[22px] text-black w-[352px] whitespace-pre-wrap" data-node-id="1:45573">{`seven   featured project(s)`}</p>
-          </div>
-          <div className="h-[34px] pointer-events-none relative shrink-0 w-[605px]" data-node-id="1:45574">
-            <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-            <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
-          </div>
-        </div>
-        <div className="absolute content-stretch flex h-[34px] items-center left-[7px] right-[7px] top-[561px]" data-node-id="1:45575">
-          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] mr-[-6px] place-items-start relative shrink-0" data-node-id="1:45576">
-            <div className="col-1 h-[102px] ml-0 mt-0 pointer-events-none relative row-1 w-[373px]" data-node-id="1:45577">
-              <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-              <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
+            <div className="absolute content-stretch flex h-[34px] items-center left-[7px] right-[7px] top-[561px]" data-node-id="1:45575">
+              <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] mr-[-6px] place-items-start relative shrink-0" data-node-id="1:45576">
+                <div className="col-1 h-[102px] ml-0 mt-0 pointer-events-none relative row-1 w-[373px]" data-node-id="1:45577">
+                  <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
+                  <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
+                </div>
+                <p key={idx} className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[11px] mt-[15px] relative row-1 text-[32px] text-black w-[352px]" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }} data-node-id="1:45578">
+                  ({idx + 1}) {projects[idx].name}
+                </p>
+              </div>
+              <div className="h-[104px] pointer-events-none relative shrink-0 w-[608px]" data-node-id="1:45579">
+                <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
+                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
+              </div>
             </div>
-            <p key={idx} className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[11px] mt-[15px] relative row-1 text-[32px] text-black w-[352px]" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }} data-node-id="1:45578">
-              ({idx + 1}) {projects[idx].name}
+            <div className="absolute h-[467px] left-[5px] top-[128px] w-[975px]" data-node-id="1:45580" data-name="Border Lines">
+              <div className="absolute inset-[-0.43%_0_0_0]">
+                <img alt="" className="block max-w-none size-full" src={imgBorderLines} />
+              </div>
+            </div>
+            <div key={idx} className="absolute left-[389px] top-[537px] flex items-center justify-start gap-[16px] w-[592px] overflow-hidden" data-name="Tech Stack Logos" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}>
+              {projects[idx].tech.split(" · ").map(t => {
+                const icons: Record<string, string> = { "Next.js": "nextjs/nextjs-original", "TypeScript": "typescript/typescript-original", "Tailwind CSS": "tailwindcss/tailwindcss-original", "Node.js": "nodejs/nodejs-original", "PostgreSQL": "postgresql/postgresql-original", "React": "react/react-original", "Vite": "vitejs/vitejs-original", "C#": "csharp/csharp-original", "Vue.js": "vuejs/vuejs-original", "Express.js": "express/express-original", "React Native": "react/react-original", "Docker": "docker/docker-original", "Prisma ORM": "prisma/prisma-original", "Supabase": "supabase/supabase-original", "ASP.NET Core Web API": "dotnetcore/dotnetcore-original", "Entity Framework Core": "dotnetcore/dotnetcore-original", "Vue Router": "vuejs/vuejs-original" };
+                if (!icons[t]) return null;
+                return <img key={t} src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icons[t]}.svg`} alt={t} title={t} className="w-[40px] h-[40px] drop-shadow-sm" onError={(e) => (e.currentTarget.style.display = "none")} />;
+              })}
+            </div>
+            <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e,inset_4px_4px_0px_0px_#b1b1b1]" />
+          </div>
+          <div className="absolute bg-[#d9d9d9] h-[131px] left-[237px] top-[792px] w-[971px]" data-node-id="1:45618" />
+          <div className="absolute bg-[#d9d9d9] h-[399px] left-[235px] top-[325px] w-[970px] -z-10" data-node-id="1:45619" />
+          <div key={`info-${idx}`} className="pointer-events-auto absolute left-[246px] top-[800px] w-[948px] h-[115px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-[16px] [&::-webkit-scrollbar-track]:bg-[#c3c3c3] [&::-webkit-scrollbar-track]:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5)] [&::-webkit-scrollbar-thumb]:bg-[#02007f] [&::-webkit-scrollbar-thumb]:shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.5),inset_2px_2px_0px_rgba(255,255,255,0.3)] z-10" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}>
+            <p className="font-['Poppins:SemiBold'] text-[18px] text-black mb-[4px]">{projects[idx].tagline}</p>
+            <p className="font-['Inter:Regular'] text-[14px] text-black whitespace-pre-wrap mb-[12px] leading-relaxed">
+              {projects[idx].desc}
             </p>
+            <div className="mb-[8px]">
+              <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Key Features:</span>
+              <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].features}</span>
+            </div>
+            <div className="mb-[8px]">
+              <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Integrations:</span>
+              <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].integrations}</span>
+            </div>
+            <div className="mb-[8px]">
+              <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Tech Stack:</span>
+              <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].tech}</span>
+            </div>
           </div>
-          <div className="h-[104px] pointer-events-none relative shrink-0 w-[608px]" data-node-id="1:45579">
-            <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-            <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
+          <div className="pointer-events-auto absolute contents left-[142px] top-[552px]" data-node-id="1:45623" data-name="Nav Arrow">
+            <div role="button" aria-label="Next project" onClick={() => step(1)} className="absolute contents cursor-pointer left-[1227px] top-[557px]" data-node-id="1:45624">
+              <div className="absolute border border-black border-solid h-[50px] left-[1227px] pointer-events-auto shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[557px] w-[54px]" data-node-id="1:45625">
+                <div aria-hidden className="absolute bg-[#d9d9d9] inset-0" />
+                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]" />
+              </div>
+              <p className="[word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal leading-[normal] left-[1246px] text-[32px] text-black top-[564px] whitespace-nowrap pointer-events-auto" data-node-id="1:45626">{`>`}</p>
+            </div>
+            <div role="button" aria-label="Previous project" onClick={() => step(-1)} className="absolute contents cursor-pointer left-[142px] top-[552px]" data-node-id="1:45627">
+              <div className="absolute border border-black border-solid h-[50px] left-[142px] pointer-events-auto shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[552px] w-[54px]" data-node-id="1:45628">
+                <div aria-hidden className="absolute bg-[#d9d9d9] inset-0" />
+                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]" />
+              </div>
+              <p className="[word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal leading-[normal] left-[157px] text-[32px] text-black top-[558px] whitespace-nowrap pointer-events-auto" data-node-id="1:45629">{`<`}</p>
+            </div>
+          </div>
+          <div className="absolute left-[235px] top-[325px] w-[971px] h-[399px] overflow-hidden pointer-events-none" data-node-id="1:45630" data-name="Project Showcase Wrapper">
+            <div key={idx} className="group absolute inset-0 pointer-events-auto overflow-hidden">
+              {projects[idx].image ? (
+                <img
+                  src={projects[idx].image}
+                  alt={projects[idx].name}
+                  className="size-full object-cover object-top select-none transition-transform duration-300 group-hover:scale-[1.02]"
+                  style={{ animation: "fadein 0.25s ease-out forwards" }}
+                />
+              ) : (
+                <div className="size-full flex items-center justify-center bg-white text-gray-300 font-['Poppins:Bold'] text-2xl">
+                  [ Image Placeholder ]
+                </div>
+              )}
+
+              {/* Minimalist Blue Hover Overlay */}
+              <div className="absolute inset-0 z-10 flex items-center justify-center gap-[14px] bg-[#02007f]/70 backdrop-blur-[2px] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                <a
+                  href={projects[idx].live || projects[idx].github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group/btn relative px-[16px] py-[6px] bg-white text-[#02007f] font-['Pixelify_Sans:Regular'] text-[17px] tracking-wide shadow-[0px_2px_8px_rgba(0,0,0,0.3)] hover:bg-[#ffcc2a] hover:text-black transition-all duration-150 flex items-center gap-[6px] active:translate-y-[1px]"
+                >
+                  <span>View Live Website</span>
+                  <span className="text-[14px] transition-transform duration-150 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">↗</span>
+                </a>
+                <a
+                  href={projects[idx].github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group/btn relative px-[16px] py-[6px] bg-black/40 hover:bg-black/60 border border-white/70 text-white font-['Pixelify_Sans:Regular'] text-[17px] tracking-wide shadow-[0px_2px_8px_rgba(0,0,0,0.3)] backdrop-blur-sm transition-all duration-150 flex items-center gap-[6px] active:translate-y-[1px]"
+                >
+                  <span>View Repository</span>
+                  <span className="text-[14px] transition-transform duration-150 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">↗</span>
+                </a>
+              </div>
+
+              <div className="pointer-events-none absolute inset-0 z-20 shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]" />
+            </div>
           </div>
         </div>
-        <div className="absolute h-[467px] left-[5px] top-[128px] w-[975px]" data-node-id="1:45580" data-name="Border Lines">
-          <div className="absolute inset-[-0.43%_0_0_0]">
-            <img alt="" className="block max-w-none size-full" src={imgBorderLines} />
-          </div>
-        </div>
-        <div key={idx} className="absolute left-[389px] top-[537px] flex items-center justify-start gap-[16px] w-[592px] overflow-hidden" data-name="Tech Stack Logos" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}>
-          {projects[idx].tech.split(" · ").map(t => {
-            const icons: Record<string, string> = { "Next.js": "nextjs/nextjs-original", "TypeScript": "typescript/typescript-original", "Tailwind CSS": "tailwindcss/tailwindcss-original", "Node.js": "nodejs/nodejs-original", "PostgreSQL": "postgresql/postgresql-original", "React": "react/react-original", "Vite": "vitejs/vitejs-original", "C#": "csharp/csharp-original", "Vue.js": "vuejs/vuejs-original", "Express.js": "express/express-original", "React Native": "react/react-original", "Docker": "docker/docker-original", "Prisma ORM": "prisma/prisma-original", "Supabase": "supabase/supabase-original", "ASP.NET Core Web API": "dotnetcore/dotnetcore-original", "Entity Framework Core": "dotnetcore/dotnetcore-original", "Vue Router": "vuejs/vuejs-original" };
-            if (!icons[t]) return null;
-            return <img key={t} src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icons[t]}.svg`} alt={t} title={t} className="w-[40px] h-[40px] drop-shadow-sm" onError={(e) => (e.currentTarget.style.display = "none")} />;
-          })}
-        </div>
-        <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e,inset_4px_4px_0px_0px_#b1b1b1]" />
-      </div>
-      <div className="absolute bg-[#d9d9d9] h-[131px] left-[237px] top-[792px] w-[971px]" data-node-id="1:45618" />
-      <div className="absolute bg-[#d9d9d9] h-[399px] left-[235px] top-[325px] w-[970px] -z-10" data-node-id="1:45619" />
-      <div key={`info-${idx}`} className="absolute left-[246px] top-[800px] w-[948px] h-[115px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-[16px] [&::-webkit-scrollbar-track]:bg-[#c3c3c3] [&::-webkit-scrollbar-track]:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5)] [&::-webkit-scrollbar-thumb]:bg-[#02007f] [&::-webkit-scrollbar-thumb]:shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.5),inset_2px_2px_0px_rgba(255,255,255,0.3)] z-10" style={{ animation: "fadein 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}>
-        <p className="font-['Poppins:SemiBold'] text-[18px] text-black mb-[4px]">{projects[idx].tagline}</p>
-        <p className="font-['Inter:Regular'] text-[14px] text-black whitespace-pre-wrap mb-[12px] leading-relaxed">
-          {projects[idx].desc}
-        </p>
-        <div className="mb-[8px]">
-          <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Key Features:</span>
-          <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].features}</span>
-        </div>
-        <div className="mb-[8px]">
-          <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Integrations:</span>
-          <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].integrations}</span>
-        </div>
-        <div className="mb-[8px]">
-          <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Tech Stack:</span>
-          <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].tech}</span>
-        </div>
-      </div>
-      </>)}
+      )}
       <div 
         className="absolute z-20 flex flex-col gap-[24px] items-center left-[29px] top-[183px] w-[130px]" 
         style={{ transform: "translateX(var(--screen-shift-left, 0px))" }} 
@@ -456,8 +593,8 @@ export default function Projects() {
         <div 
           role="button" 
           tabIndex={0} 
-          onClick={() => setOpen(true)} 
-          onKeyDown={(e) => e.key === "Enter" && setOpen(true)} 
+          onClick={triggerVibrate} 
+          onKeyDown={(e) => e.key === "Enter" && triggerVibrate()} 
           className="cursor-pointer flex flex-col gap-[12px] items-center w-[130px] transition-transform duration-200 hover:scale-105 active:scale-95" 
           data-node-id="1:45621" 
           data-name="Desktop Item"
@@ -470,8 +607,8 @@ export default function Projects() {
         <div 
           role="button" 
           tabIndex={0} 
-          onClick={() => setAlertOpen(true)} 
-          onKeyDown={(e) => e.key === "Enter" && setAlertOpen(true)} 
+          onClick={triggerFolderVibrate} 
+          onKeyDown={(e) => e.key === "Enter" && triggerFolderVibrate()} 
           className="cursor-pointer flex flex-col gap-[12px] items-center w-[130px] transition-transform duration-200 hover:scale-105 active:scale-95" 
           data-node-id="1:45622" 
           data-name="Desktop Item"
@@ -484,45 +621,13 @@ export default function Projects() {
           </p>
         </div>
       </div>
-      {open && (<>
-      <div className="absolute contents left-[142px] top-[552px]" data-node-id="1:45623" data-name="Nav Arrow">
-        <div role="button" aria-label="Next project" onClick={() => step(1)} className="absolute contents cursor-pointer left-[1227px] top-[557px]" data-node-id="1:45624">
-          <div className="absolute border border-black border-solid h-[50px] left-[1227px] pointer-events-none shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[557px] w-[54px]" data-node-id="1:45625">
-            <div aria-hidden className="absolute bg-[#d9d9d9] inset-0" />
-            <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]" />
-          </div>
-          <p className="[word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal leading-[normal] left-[1246px] text-[32px] text-black top-[564px] whitespace-nowrap" data-node-id="1:45626">{`>`}</p>
-        </div>
-        <div role="button" aria-label="Previous project" onClick={() => step(-1)} className="absolute contents cursor-pointer left-[142px] top-[552px]" data-node-id="1:45627">
-          <div className="absolute border border-black border-solid h-[50px] left-[142px] pointer-events-none shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[552px] w-[54px]" data-node-id="1:45628">
-            <div aria-hidden className="absolute bg-[#d9d9d9] inset-0" />
-            <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]" />
-          </div>
-          <p className="[word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal leading-[normal] left-[157px] text-[32px] text-black top-[558px] whitespace-nowrap" data-node-id="1:45629">{`<`}</p>
-        </div>
-      </div>
-      <div className="absolute left-[235px] top-[325px] w-[971px] h-[399px] overflow-hidden pointer-events-none" data-node-id="1:45630" data-name="Project Showcase Wrapper">
-        <div key={idx} className="absolute inset-0 pointer-events-auto">
-          <div className="absolute bg-white h-[336px] left-[138px] top-[32px] w-[679px] rounded-sm shadow-xl flex items-center justify-center text-gray-200 font-['Poppins:Bold'] text-2xl overflow-hidden" style={{ animation: dir > 0 ? "slideNext 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "slidePrev 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" }} data-node-id="1:45631">
-            [ Image Placeholder ]
-          </div>
-          <div className="absolute bg-white h-[285px] left-[0px] top-[54px] w-[108px] rounded-sm shadow-md overflow-hidden flex items-center" style={{ animation: dir > 0 ? "slideNext 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "slidePrev 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" }} data-node-id="1:45632">
-            <div className="w-full text-center rotate-[-90deg] font-['Pixelify_Sans:Regular'] text-[24px] text-gray-300 whitespace-nowrap opacity-50 select-none">
-              {projects[(idx - 1 + projects.length) % projects.length].name}
-            </div>
-          </div>
-          <div className="absolute bg-white h-[285px] left-[847px] top-[54px] w-[124px] rounded-sm shadow-md overflow-hidden flex items-center" style={{ animation: dir > 0 ? "slideNext 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "slidePrev 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" }} data-node-id="1:45633">
-            <div className="w-full text-center rotate-90 font-['Pixelify_Sans:Regular'] text-[24px] text-gray-300 whitespace-nowrap opacity-50 select-none">
-              {projects[(idx + 1) % projects.length].name}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      </>)}
       {alertOpen && (
         <div className="absolute z-50 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 w-[480px]">
-          <div className="relative w-full shadow-[2px_2px_0px_0px_#000000]">
+          <div 
+            ref={alertWindowRef}
+            onAnimationEnd={() => alertWindowRef.current?.classList.remove("animate-window-vibrate")}
+            className="relative w-full shadow-[2px_2px_0px_0px_#000000]"
+          >
             <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
             <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e,inset_4px_4px_0px_0px_#b1b1b1]" />
             <div className="relative bg-[#02007f] flex items-center justify-between mx-[4px] mt-[4px] px-[4px] py-[3px]">
@@ -534,7 +639,7 @@ export default function Projects() {
             <div className="relative p-[24px] flex flex-col items-center gap-[24px] mt-[4px]">
               <div className="flex items-center gap-[20px] w-full">
                 <div className="size-[48px] rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-[32px] shrink-0 border-2 border-white shadow-[1px_1px_0px_1px_#000] drop-shadow-md">X</div>
-                <p className="font-['Pixelify_Sans:Regular'] text-[24px] text-black leading-tight">You don't have the permissions to access this file</p>
+                <p className="font-['Pixelify_Sans:Regular'] text-[24px] text-black leading-tight">You don't have the permissions to access this folder</p>
               </div>
               <button 
                 onClick={() => setAlertOpen(false)}
