@@ -55,20 +55,13 @@ type UtilityIconsProps = {
   onOff?: "On";
 };
 
-function UtilityIcons({ className, icon = "Close", onOff = "On" }: UtilityIconsProps) {
+function UtilityIcons({ className }: UtilityIconsProps) {
   return (
-    <div className={className || "overflow-clip relative size-[17px]"} data-node-id="1:45093">
-      <div className="absolute contents left-[2px] top-px" data-node-id="1:45094">
-        <div className="absolute bg-black h-[3px] left-[2px] top-px w-[2px]" data-node-id="1:45095" />
-        <div className="absolute bg-black h-[3px] left-[2px] top-[13px] w-[2px]" data-node-id="1:45096" />
-        <div className="absolute bg-black h-[3px] left-[13px] top-px w-[2px]" data-node-id="1:45097" />
-        <div className="absolute bg-black h-[3px] left-[13px] top-[13px] w-[2px]" data-node-id="1:45098" />
-        <div className="absolute bg-black h-[3px] left-[4px] top-[4px] w-[2px]" data-node-id="1:45099" />
-        <div className="absolute bg-black h-[3px] left-[4px] top-[10px] w-[2px]" data-node-id="1:45100" />
-        <div className="absolute bg-black h-[3px] left-[11px] top-[4px] w-[2px]" data-node-id="1:45101" />
-        <div className="absolute bg-black h-[3px] left-[11px] top-[10px] w-[2px]" data-node-id="1:45102" />
-        <div className="absolute bg-black h-[3px] left-[6px] top-[7px] w-[5px]" data-node-id="1:45103" />
-      </div>
+    <div className={className || "flex items-center justify-center size-[16px]"} data-node-id="1:45093">
+      <svg className="size-[10px] text-black" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+        <line x1="1.5" y1="1.5" x2="8.5" y2="8.5" />
+        <line x1="8.5" y1="1.5" x2="1.5" y2="8.5" />
+      </svg>
     </div>
   );
 }
@@ -82,6 +75,50 @@ function SmallIconButton({ className }: { className?: string }) {
     </div>
   );
 }
+
+const DEV_ICONS: Record<string, string> = {
+  "Next.js": "nextjs/nextjs-original",
+  "TypeScript": "typescript/typescript-original",
+  "Tailwind CSS": "tailwindcss/tailwindcss-original",
+  "Node.js": "nodejs/nodejs-original",
+  "PostgreSQL": "postgresql/postgresql-original",
+  "Postgresql": "postgresql/postgresql-original",
+  "Neon": "postgresql/postgresql-original",
+  "React": "react/react-original",
+  "Vite": "vitejs/vitejs-original",
+  "C#": "csharp/csharp-original",
+  "Vue.js": "vuejs/vuejs-original",
+  "Express.js": "express/express-original",
+  "React Native": "react/react-original",
+  "Docker": "docker/docker-original",
+  "Prisma ORM": "prisma/prisma-original",
+  "Supabase": "supabase/supabase-original",
+  "Supabase Auth": "supabase/supabase-original",
+  "Supabase Storage": "supabase/supabase-original",
+  "ASP.NET Core Web API": "dotnetcore/dotnetcore-original",
+  "ASP.NET Core": "dotnetcore/dotnetcore-original",
+  "Entity Framework Core": "dotnetcore/dotnetcore-original",
+  "Vue Router": "vuejs/vuejs-original",
+  "Pinia": "vuejs/vuejs-original",
+  "Monaco Editor": "vscode/vscode-original",
+  "Socket.IO": "socketio/socketio-original",
+  "WebSockets/Socket.IO": "socketio/socketio-original",
+  "Git": "git/git-original",
+  "GitHub": "github/github-original",
+  "Python": "python/python-original",
+  "JavaScript": "javascript/javascript-original",
+  "Expo": "expo/expo-original",
+  "Expo Router": "expo/expo-original",
+  "Expo Notifications": "expo/expo-original",
+  "shadcn/ui": "react/react-original",
+  "Recharts/Chart.js": "chartjs/chartjs-plain",
+  "Chart.js": "chartjs/chartjs-plain",
+  "Zustand or React Context": "react/react-original",
+  "React Native Reanimated": "react/react-original",
+  "Node.js or ASP.NET Core": "nodejs/nodejs-original",
+  "Express.js or ASP.NET Core Web API": "express/express-original",
+  "Prisma ORM or Entity Framework Core": "prisma/prisma-original",
+};
 
 export type Project = {
   name: string;
@@ -162,7 +199,7 @@ export const projects: Project[] = [
     github: "https://github.com/Alicia-Kate-Bactasa/Exec-Space",
     tagline: "Browser-Based Multi-Language Code Execution Environment",
     desc: "Exec-Space is a browser-based coding environment that allows users to write, compile, and execute programs directly from their browser. The platform supports multiple programming languages, such as C, C++, and JavaScript, allowing users to experiment with code without configuring a local development environment.\n\nUsers can select a language, write code using an interactive editor, provide standard input, execute their program, and view output or compiler errors. The system can also support saved projects and execution history, making it useful as both a coding workspace and learning environment.",
-    features: "Multi-language code execution · Interactive code editor · Syntax highlighting · Standard input and output · Compiler and runtime error display · Language switching · Execution history · Saved code projects · Resource and execution limits · Shareable code snippets",
+    features: "Multi-language code execution · Interactive built-in code editor · Syntax highlighting · Standard input and output · Compiler and runtime error display · Language switching · Execution history · Saved code projects · Resource and execution limits · Shareable code snippets",
     integrations: "Code execution API · Authentication · Cloud storage · WebSockets for future real-time collaboration",
     tech: "React · Vite · TypeScript · Tailwind CSS · Monaco Editor · Node.js or ASP.NET Core · PostgreSQL · Docker · Judge0 API · REST API · WebSockets/Socket.IO · JWT Authentication"
   }
@@ -228,10 +265,23 @@ export default function Projects() {
     return () => window.removeEventListener("vibrate-myprojects", handleVibrateEvent);
   }, [triggerVibrate]);
 
-  const step = (d: number) => {
+  const step = useCallback((d: number) => {
     setDir(d);
     setIdx((i) => (i + d + projects.length) % projects.length);
-  };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA") return;
+      if (e.key === "ArrowLeft") {
+        step(-1);
+      } else if (e.key === "ArrowRight") {
+        step(1);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [step]);
   return (
     <div className="relative w-[1440px] h-[1024px] overflow-visible bg-transparent" data-node-id="1:45540" data-name="Featured Projects">
       <div className="keycap-header-wrapper absolute left-0 top-0 z-30" style={{ transform: "translateX(var(--keycap-shift, 0px))" }}>
@@ -407,178 +457,337 @@ export default function Projects() {
           onAnimationEnd={() => windowRef.current?.classList.remove("animate-window-vibrate")}
           className="absolute inset-0 pointer-events-none z-10"
         >
-          <div className="pointer-events-auto absolute h-[772px] left-[228px] top-[197px] w-[983px]" data-node-id="1:45565" data-name="Figma">
-            <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
-            <div className="absolute inset-[94px_7px_46px_5px] pointer-events-none" data-node-id="1:45566">
-              <div aria-hidden className="absolute bg-white inset-0" />
-              <div className="absolute inset-0 rounded-[inherit] shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]" />
+          {/* Main 2-Column Windows 95 Application Window */}
+          <div
+            className="pointer-events-auto absolute h-[772px] left-[146px] top-[197px] w-[1226px] bg-[#c3c3c3] select-none flex flex-col p-[4px] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e,inset_4px_4px_0px_0px_#b1b1b1]"
+            data-node-id="1:45565"
+            data-name="Figma"
+          >
+            {/* 1. Title Bar */}
+            <div
+              className="bg-[#02007f] flex items-center justify-between px-[8px] py-[4px] shrink-0 select-none cursor-pointer"
+              onClick={triggerVibrate}
+              data-name="Title Bar"
+            >
+              <div className="flex items-center gap-[8px] min-w-0">
+                <div className="size-[22px] shrink-0 overflow-hidden">
+                  <img
+                    alt="Window Icon"
+                    src={imgComputerWithPrograms11}
+                    className="size-full object-contain"
+                  />
+                </div>
+                <p className="font-['Poppins:SemiBold'] text-[16px] text-white leading-none tracking-wide truncate">
+                  My Projects — ({idx + 1}/{projects.length}) {projects[idx].name} : {projects[idx].tagline}
+                </p>
+              </div>
+              <div className="flex items-center gap-[4px] shrink-0 ml-[8px]">
+                <button
+                  type="button"
+                  aria-label="Minimize"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpen(false);
+                  }}
+                  className="size-[22px] bg-[#c3c3c3] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-3px_-3px_0px_0px_#7e7e7e] active:shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0] flex items-center justify-center cursor-pointer"
+                >
+                  <div className="w-[10px] h-[2px] bg-black translate-y-[3px]" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Close"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpen(false);
+                  }}
+                  className="size-[22px] bg-[#c3c3c3] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-3px_-3px_0px_0px_#7e7e7e] active:shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0] flex items-center justify-center cursor-pointer"
+                >
+                  <svg className="size-[10px] text-black" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+                    <line x1="1.5" y1="1.5" x2="8.5" y2="8.5" />
+                    <line x1="8.5" y1="1.5" x2="1.5" y2="8.5" />
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div className="absolute bg-[#02007f] content-stretch flex items-center justify-between left-[5px] pl-[8px] pr-[4px] py-[5px] right-[5px] top-[4px]" data-node-id="1:45567" data-name="Component 3">
+
+            {/* 2. Menu Bar */}
+            <div className="flex items-center justify-between px-[8px] py-[3px] text-[13px] font-['Poppins:Medium'] border-b border-[#7e7e7e] bg-[#c3c3c3] shrink-0">
+              <div className="flex items-center gap-[20px]">
+                <button
+                  type="button"
+                  onClick={() => window.open(projects[idx].live || projects[idx].github, "_blank")}
+                  className="cursor-pointer hover:bg-[#02007f] hover:text-white px-[4px] leading-tight flex items-center gap-[4px]"
+                >
+                  <span><span className="underline">V</span>iew Live Website &rarr;</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => window.open(projects[idx].github, "_blank")}
+                  className="cursor-pointer hover:bg-[#02007f] hover:text-white px-[4px] leading-tight flex items-center gap-[4px]"
+                >
+                  <span><span className="underline">V</span>iew GitHub Repository &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            {/* 3. Sub-header: Quick Pager Tabs with Project Names */}
+            <div className="flex items-center justify-between gap-[8px] px-[6px] py-[4px] shrink-0">
+              <div className="h-[28px] px-[10px] bg-[#c3c3c3] shadow-[inset_2px_2px_0px_0px_#7e7e7e,inset_-2px_-2px_0px_0px_#f0f0f0] flex items-center shrink-0">
+                <p className="font-['Poppins:SemiBold'] text-[13px] text-black leading-none">
+                  7 featured project(s)
+                </p>
+              </div>
+
+              <div className="flex-1 h-[28px] px-[6px] bg-[#c3c3c3] shadow-[inset_2px_2px_0px_0px_#7e7e7e,inset_-2px_-2px_0px_0px_#f0f0f0] flex items-center justify-end gap-[4px] overflow-x-auto">
+                {projects.map((p, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      setDir(i > idx ? 1 : -1);
+                      setIdx(i);
+                    }}
+                    title={`${i + 1}. ${p.name}`}
+                    className={`h-[22px] px-[8px] font-['Poppins:Medium'] text-[12px] cursor-pointer flex items-center justify-center whitespace-nowrap transition-all ${
+                      i === idx
+                        ? "bg-[#02007f] text-white shadow-[inset_1px_1px_0px_#000]"
+                        : "bg-[#c3c3c3] text-black shadow-[inset_-1px_-1px_0px_#262626,inset_1px_1px_0px_#fff] hover:bg-[#dcdcdc]"
+                    }`}
+                  >
+                    {i + 1}. {p.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 4. Main 2-Column Content Area */}
+            <div className="flex-1 min-h-0 flex gap-[8px] p-[4px] overflow-hidden">
+              {/* Column 1: Full Picture Display Showcase (Encapsulated, No White Space) */}
+              <div className="w-[700px] shrink-0 flex flex-col bg-[#c3c3c3] shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_3px_3px_0px_0px_#7e7e7e] p-[4px] overflow-hidden">
+                {/* Showcase Header */}
+                <div className="h-[28px] bg-[#02007f] text-white px-[10px] flex items-center justify-between text-[13px] font-['Poppins:Medium'] shrink-0 select-none">
+                  <span className="truncate">Preview Showcase / {projects[idx].name}</span>
+                  <span className="text-[12px] opacity-90">
+                    {idx + 1} of {projects.length}
+                  </span>
+                </div>
+
+                {/* Picture Frame: perfectly fits and encapsulates the entire picture with NO cropping and NO white space */}
+                <div className="w-full relative bg-[#0e0e0e] overflow-hidden group select-none shadow-[inset_2px_2px_0px_0px_#000,inset_-2px_-2px_0px_0px_#333]">
+                  {projects[idx].image ? (
+                    <img
+                      key={idx}
+                      src={projects[idx].image}
+                      alt={projects[idx].name}
+                      className="w-full h-auto block select-none transition-transform duration-300 group-hover:scale-[1.01]"
+                    />
+                  ) : (
+                    <div className="w-full h-[360px] flex items-center justify-center text-gray-500 font-['Poppins:Medium'] text-sm">
+                      No image available
+                    </div>
+                  )}
+
+                  {/* Clean Minimalist Hover Overlay */}
+                  <div className="absolute inset-0 z-10 flex items-center justify-center gap-[12px] bg-[#02007f]/75 backdrop-blur-[2px] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                    <a
+                      href={projects[idx].live || projects[idx].github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-[16px] py-[8px] bg-white text-[#02007f] font-['Poppins:SemiBold'] text-[14px] shadow-md hover:bg-[#ffcc2a] hover:text-black transition-all flex items-center gap-[6px] active:translate-y-[1px]"
+                    >
+                      <span>View Live Website</span>
+                      <span>&rarr;</span>
+                    </a>
+                    <a
+                      href={projects[idx].github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-[16px] py-[8px] bg-black/60 hover:bg-black/80 border border-white/70 text-white font-['Poppins:SemiBold'] text-[14px] shadow-md backdrop-blur-sm transition-all flex items-center gap-[6px] active:translate-y-[1px]"
+                    >
+                      <span>View Repository</span>
+                      <span>&rarr;</span>
+                    </a>
+                  </div>
+
+                  {/* 3D Inset border around image */}
+                  <div className="pointer-events-none absolute inset-0 z-20 shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0]" />
+                </div>
+
+                {/* Picture Toolbar under Screenshot */}
+                <div className="h-[44px] shrink-0 mt-[4px] bg-[#c3c3c3] flex items-center justify-between px-[6px] border-t border-[#7e7e7e]">
+                  <div className="flex items-center gap-[6px]">
+                    <button
+                      type="button"
+                      onClick={() => step(-1)}
+                      className="h-[30px] px-[14px] bg-[#c3c3c3] text-black font-['Poppins:Medium'] text-[13px] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-3px_-3px_0px_0px_#7e7e7e] active:shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0] cursor-pointer hover:bg-[#d8d8d8] flex items-center gap-[4px]"
+                    >
+                      <span>&larr;</span> Previous
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => step(1)}
+                      className="h-[30px] px-[14px] bg-[#c3c3c3] text-black font-['Poppins:Medium'] text-[13px] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-3px_-3px_0px_0px_#7e7e7e] active:shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0] cursor-pointer hover:bg-[#d8d8d8] flex items-center gap-[4px]"
+                    >
+                      Next <span>&rarr;</span>
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-[6px]">
+                    <a
+                      href={projects[idx].live || projects[idx].github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="h-[30px] px-[14px] bg-[#02007f] hover:bg-[#0000bb] text-white font-['Poppins:Medium'] text-[13px] shadow-[inset_-1px_-1px_0px_#000,inset_1px_1px_0px_#fff] flex items-center gap-[4px] cursor-pointer active:translate-y-[1px]"
+                    >
+                      <span>Live Website</span>
+                      <span className="text-[11px]">&rarr;</span>
+                    </a>
+                    <a
+                      href={projects[idx].github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="h-[30px] px-[14px] bg-[#e6e6e6] text-black font-['Poppins:Medium'] text-[13px] shadow-[inset_-1px_-1px_0px_#262626,inset_1px_1px_0px_#fff] hover:bg-[#02007f] hover:text-white flex items-center gap-[4px]"
+                    >
+                      <span>GitHub</span>
+                      <span className="text-[11px]">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Interface & Platform Summary: Tech Stack Only (Prominent & Larger) */}
+                <div className="flex-1 min-h-0 mt-[4px] bg-[#d6d6d6] shadow-[inset_1px_1px_0px_#fff,inset_-1px_-1px_0px_#7e7e7e] p-[10px] flex flex-col overflow-hidden">
+                  <div className="border-b border-[#b5b5b5] pb-[6px] mb-[8px] shrink-0 text-center">
+                    <span className="font-['Poppins:Bold'] text-[13px] text-[#02007f] uppercase tracking-wider">
+                      Tech Stack
+                    </span>
+                  </div>
+
+                  <div className="flex-1 min-h-0 overflow-y-auto pr-[4px] [&::-webkit-scrollbar]:w-[8px] [&::-webkit-scrollbar-track]:bg-[#e0e0e0] [&::-webkit-scrollbar-thumb]:bg-[#02007f]">
+                    <div className="flex flex-wrap justify-center items-center gap-[8px]">
+                      {projects[idx].tech
+                        .split("·")
+                        .map((t) => t.trim())
+                        .filter(Boolean)
+                        .filter((item, index, self) => index === self.findIndex((t) => t.toLowerCase() === item.toLowerCase()))
+                        .map((tech) => (
+                          <div
+                            key={tech}
+                            title={tech}
+                            className="inline-flex items-center gap-[8px] px-[11px] py-[6px] bg-[#d9d9d9] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#ffffff,inset_-3px_-3px_0px_0px_#7e7e7e] hover:bg-[#e4e4e4] transition-all select-none"
+                          >
+                            {DEV_ICONS[tech] && (
+                              <img
+                                src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${DEV_ICONS[tech]}.svg`}
+                                alt=""
+                                className="size-[22px] object-contain shrink-0"
+                                onError={(e) => (e.currentTarget.style.display = "none")}
+                              />
+                            )}
+                            <span className="font-['Inter:SemiBold'] text-[13px] text-[#0f172a]">
+                              {tech}
+                            </span>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 2: Only Description, Integrations & Key Features (2-Column Allocation) */}
               <div
-                role="button"
-                tabIndex={0}
-                onClick={triggerVibrate}
-                className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 cursor-pointer"
-                data-node-id="I1:45567;61:4318"
+                key={idx}
+                className="flex-1 min-w-0 flex flex-col bg-[#c3c3c3] shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_3px_3px_0px_0px_#7e7e7e] overflow-hidden"
               >
-                <div className="col-1 ml-0 mt-0 relative row-1 size-[32px]" data-node-id="I1:45567;61:4319" data-name="Small Icons">
-                  <div className="absolute left-0 size-[32px] top-0" data-node-id="I1:45567;61:4319;35:331" data-name="Computer with programs-1 1">
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      <img alt="" className="absolute left-[-1.55%] max-w-none size-full top-[9.45%]" src={imgComputerWithPrograms11} />
+                {/* Scrollable Container cleanly contained inside borders */}
+                <div className="flex-1 min-h-0 overflow-y-auto p-[22px] [&::-webkit-scrollbar]:w-[12px] [&::-webkit-scrollbar-track]:bg-[#d4d4d4] [&::-webkit-scrollbar-thumb]:bg-[#02007f] [&::-webkit-scrollbar-thumb]:shadow-[inset_-1px_-1px_0px_#000,inset_1px_1px_0px_#fff]">
+                  {/* Project Header */}
+                  <div className="border-b border-[#a0a0a0] pb-[14px] mb-[16px]">
+                    <h2 className="font-['Poppins:Bold'] text-[28px] text-[#0f172a] leading-tight tracking-tight">
+                      {projects[idx].name}
+                    </h2>
+                    <p className="font-['Poppins:Medium'] text-[15px] text-[#02007f] leading-snug mt-[3px]">
+                      {projects[idx].tagline}
+                    </p>
+                  </div>
+
+                  {/* 1. DESCRIPTION */}
+                  <div className="mb-[20px]">
+                    <h3 className="font-['Poppins:Bold'] text-[12px] tracking-wider text-[#02007f] uppercase mb-[8px]">
+                      Description
+                    </h3>
+                    <div className="space-y-[10px]">
+                      {projects[idx].desc.split("\n\n").map((para, i) => (
+                        <p
+                          key={i}
+                          className="font-['Inter:Regular'] text-[14px] text-[#1e293b] leading-[1.65] text-justify"
+                        >
+                          {para}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 2. INTEGRATIONS (Fitted Bullet Containers) */}
+                  {projects[idx].integrations && (
+                    <div className="mb-[20px]">
+                      <h3 className="font-['Poppins:Bold'] text-[12px] tracking-wider text-[#02007f] uppercase mb-[8px]">
+                        Integrations
+                      </h3>
+                      <div className="flex flex-wrap gap-[8px]">
+                        {projects[idx].integrations
+                          .split("·")
+                          .map((item) => item.trim())
+                          .filter(Boolean)
+                          .map((integration, i) => (
+                            <div
+                              key={i}
+                              className="w-fit inline-flex items-center gap-[7px] text-[13px] font-['Inter:Medium'] text-[#111] bg-[#d9d9d9] shadow-[inset_-1px_-1px_0px_0px_#262626,inset_1px_1px_0px_0px_#ffffff,inset_-2px_-2px_0px_0px_#7e7e7e] px-[10px] py-[5px] rounded-[2px] select-none"
+                            >
+                              <span className="size-[5px] rounded-full bg-[#02007f] shrink-0" />
+                              <span>{integration}</span>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 3. KEY FEATURES (Fitted Bullet Containers) */}
+                  <div className="mb-[20px]">
+                    <h3 className="font-['Poppins:Bold'] text-[12px] tracking-wider text-[#02007f] uppercase mb-[8px]">
+                      Key Features
+                    </h3>
+                    <div className="flex flex-wrap gap-[8px]">
+                      {projects[idx].features
+                        .split("·")
+                        .map((f) => f.trim())
+                        .filter(Boolean)
+                        .map((feat, i) => (
+                          <div
+                            key={i}
+                            className="w-fit inline-flex items-center gap-[7px] text-[13px] font-['Inter:Regular'] text-[#111] bg-[#d9d9d9] shadow-[inset_-1px_-1px_0px_0px_#262626,inset_1px_1px_0px_0px_#ffffff,inset_-2px_-2px_0px_0px_#7e7e7e] px-[10px] py-[5px] rounded-[2px] select-none"
+                          >
+                            <span className="size-[5px] rounded-full bg-[#02007f] shrink-0" />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </div>
-                <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[38px] mt-[2px] relative row-1 text-[30px] text-white whitespace-nowrap" data-node-id="I1:45567;61:4320">
-                  My Projects
-                </p>
               </div>
-              <div className="content-stretch flex gap-[4px] items-center justify-end relative shrink-0" data-node-id="I1:45567;61:4321">
-                <div role="button" aria-label="Minimize" onClick={() => setOpen(false)} className="relative shrink-0 size-[32px] cursor-pointer" data-node-id="I1:45567;61:4322" data-name="Small Icon Button">
-                  <div aria-hidden className="absolute bg-[#c3c3c3] inset-0 pointer-events-none" />
-                  <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e]" />
-                  <div className="absolute bottom-1/4 left-[21.88%] overflow-clip right-1/4 top-[21.88%]" data-node-id="I1:45567;61:4322;22:16" data-name="Utility Icons">
-                    <div className="absolute contents left-px top-[14px]" data-node-id="I1:45567;61:4322;22:16;40:64">
-                      <div className="absolute bg-black h-[2px] left-px top-[14px] w-[15px]" data-node-id="I1:45567;61:4322;22:16;40:65" />
-                    </div>
-                  </div>
-                </div>
-                <div role="button" aria-label="Close" onClick={() => setOpen(false)} className="contents cursor-pointer"><SmallIconButton className="relative shrink-0 size-[32px]" /></div>
-              </div>
-            </div>
-            <div className="absolute h-[46px] left-0 top-[50px] w-[232px]" data-node-id="1:45568" data-name="Panel Menu">
-              <div className="[word-break:break-word] absolute bottom-[21.74%] content-stretch flex font-['Pixelify_Sans:Regular'] font-normal gap-[32px] items-start left-[16px] text-[26px] text-black top-[21.74%] whitespace-nowrap" data-node-id="I1:45568;61:5140">
-                <p className="leading-[0] relative shrink-0 cursor-pointer hover:bg-[#02007f] hover:text-white" onClick={() => window.open(projects[idx].github, "_blank")} data-node-id="I1:45568;61:5118">
-                  <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">V</span>
-                  <span className="leading-[26px]">iew Live Website</span>
-                </p>
-                <p className="leading-[0] relative shrink-0 cursor-pointer hover:bg-[#02007f] hover:text-white" onClick={() => window.open(projects[idx].github, "_blank")} data-node-id="I1:45568;61:5124">
-                  <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">V</span>
-                  <span className="leading-[26px]">iew Github</span>
-                </p>
-                <p className="leading-[26px] relative shrink-0" data-node-id="I1:45568;61:5134">
-                  ​
-                </p>
-              </div>
-            </div>
-            <p onClick={() => step(1)} className="cursor-pointer [word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal inset-[94.82%_1.93%_1.81%_90.74%] leading-[0] text-[30px] text-black whitespace-nowrap" data-node-id="1:45569">
-              <span className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-from-font decoration-solid leading-[26px] underline">N</span>
-              <span className="leading-[26px]">ext</span>
-            </p>
-            <div className="absolute content-stretch flex h-[34px] items-center left-[9px] right-[5px] top-[98px]" data-node-id="1:45570">
-              <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] mr-[-6px] place-items-start relative shrink-0" data-node-id="1:45571">
-                <div className="col-1 h-[34px] ml-0 mt-0 pointer-events-none relative row-1 w-[373px]" data-node-id="1:45572">
-                  <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-                  <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
-                </div>
-                <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[6px] mt-0 relative row-1 text-[22px] text-black w-[352px] whitespace-pre-wrap" data-node-id="1:45573">{`seven   featured project(s)`}</p>
-              </div>
-              <div className="h-[34px] pointer-events-none relative shrink-0 w-[605px]" data-node-id="1:45574">
-                <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
-              </div>
-            </div>
-            <div className="absolute content-stretch flex h-[34px] items-center left-[7px] right-[7px] top-[561px]" data-node-id="1:45575">
-              <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] mr-[-6px] place-items-start relative shrink-0" data-node-id="1:45576">
-                <div className="col-1 h-[102px] ml-0 mt-0 pointer-events-none relative row-1 w-[373px]" data-node-id="1:45577">
-                  <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-                  <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
-                </div>
-                <p className="[word-break:break-word] col-1 font-['Pixelify_Sans:Regular'] font-normal leading-[normal] ml-[11px] mt-[15px] relative row-1 text-[32px] text-black w-[352px]" data-node-id="1:45578">
-                  ({idx + 1}) {projects[idx].name}
-                </p>
-              </div>
-              <div className="h-[104px] pointer-events-none relative shrink-0 w-[608px]" data-node-id="1:45579">
-                <div aria-hidden className="absolute bg-[#c3c3c3] inset-0" />
-                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#f0f0f0,inset_2px_2px_0px_0px_#7e7e7e]" />
-              </div>
-            </div>
-            <div className="absolute h-[467px] left-[5px] top-[128px] w-[975px]" data-node-id="1:45580" data-name="Border Lines">
-              <div className="absolute inset-[-0.43%_0_0_0]">
-                <img alt="" className="block max-w-none size-full" src={imgBorderLines} />
-              </div>
-            </div>
-            <div className="absolute left-[389px] top-[537px] flex items-center justify-start gap-[16px] w-[592px] overflow-hidden" data-name="Tech Stack Logos">
-              {projects[idx].tech.split(" · ").map(t => {
-                const icons: Record<string, string> = { "Next.js": "nextjs/nextjs-original", "TypeScript": "typescript/typescript-original", "Tailwind CSS": "tailwindcss/tailwindcss-original", "Node.js": "nodejs/nodejs-original", "PostgreSQL": "postgresql/postgresql-original", "React": "react/react-original", "Vite": "vitejs/vitejs-original", "C#": "csharp/csharp-original", "Vue.js": "vuejs/vuejs-original", "Express.js": "express/express-original", "React Native": "react/react-original", "Docker": "docker/docker-original", "Prisma ORM": "prisma/prisma-original", "Supabase": "supabase/supabase-original", "ASP.NET Core Web API": "dotnetcore/dotnetcore-original", "Entity Framework Core": "dotnetcore/dotnetcore-original", "Vue Router": "vuejs/vuejs-original" };
-                if (!icons[t]) return null;
-                return <img key={t} src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icons[t]}.svg`} alt={t} title={t} className="w-[40px] h-[40px] drop-shadow-sm" onError={(e) => (e.currentTarget.style.display = "none")} />;
-              })}
-            </div>
-            <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_-2px_-2px_0px_0px_#262626,inset_2px_2px_0px_0px_#f0f0f0,inset_-4px_-4px_0px_0px_#7e7e7e,inset_4px_4px_0px_0px_#b1b1b1]" />
-          </div>
-          <div className="absolute bg-[#d9d9d9] h-[131px] left-[237px] top-[792px] w-[971px]" data-node-id="1:45618" />
-          <div className="absolute bg-[#d9d9d9] h-[399px] left-[235px] top-[325px] w-[970px] -z-10" data-node-id="1:45619" />
-          <div className="pointer-events-auto absolute left-[246px] top-[800px] w-[948px] h-[115px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-[16px] [&::-webkit-scrollbar-track]:bg-[#c3c3c3] [&::-webkit-scrollbar-track]:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5)] [&::-webkit-scrollbar-thumb]:bg-[#02007f] [&::-webkit-scrollbar-thumb]:shadow-[inset_-2px_-2px_0px_rgba(0,0,0,0.5),inset_2px_2px_0px_rgba(255,255,255,0.3)] z-10">
-            <p className="font-['Poppins:SemiBold'] text-[18px] text-black mb-[4px]">{projects[idx].tagline}</p>
-            <p className="font-['Inter:Regular'] text-[14px] text-black whitespace-pre-wrap mb-[12px] leading-relaxed">
-              {projects[idx].desc}
-            </p>
-            <div className="mb-[8px]">
-              <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Key Features:</span>
-              <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].features}</span>
-            </div>
-            <div className="mb-[8px]">
-              <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Integrations:</span>
-              <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].integrations}</span>
-            </div>
-            <div className="mb-[8px]">
-              <span className="font-['Poppins:Bold'] text-[14px] text-[#02007f] mr-[8px]">Tech Stack:</span>
-              <span className="font-['Inter:Regular'] text-[14px] text-black leading-relaxed">{projects[idx].tech}</span>
             </div>
           </div>
-          <div className="pointer-events-auto absolute contents left-[142px] top-[552px]" data-node-id="1:45623" data-name="Nav Arrow">
-            <div role="button" aria-label="Next project" onClick={() => step(1)} className="absolute contents cursor-pointer left-[1227px] top-[557px]" data-node-id="1:45624">
-              <div className="absolute border border-black border-solid h-[50px] left-[1227px] pointer-events-auto shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[557px] w-[54px]" data-node-id="1:45625">
-                <div aria-hidden className="absolute bg-[#d9d9d9] inset-0" />
-                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]" />
-              </div>
-              <p className="[word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal leading-[normal] left-[1246px] text-[32px] text-black top-[564px] whitespace-nowrap pointer-events-auto" data-node-id="1:45626">{`>`}</p>
-            </div>
-            <div role="button" aria-label="Previous project" onClick={() => step(-1)} className="absolute contents cursor-pointer left-[142px] top-[552px]" data-node-id="1:45627">
-              <div className="absolute border border-black border-solid h-[50px] left-[142px] pointer-events-auto shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[552px] w-[54px]" data-node-id="1:45628">
-                <div aria-hidden className="absolute bg-[#d9d9d9] inset-0" />
-                <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]" />
-              </div>
-              <p className="[word-break:break-word] absolute font-['Pixelify_Sans:Regular'] font-normal leading-[normal] left-[157px] text-[32px] text-black top-[558px] whitespace-nowrap pointer-events-auto" data-node-id="1:45629">{`<`}</p>
-            </div>
-          </div>
-          <div className="absolute left-[235px] top-[325px] w-[971px] h-[399px] overflow-hidden pointer-events-none" data-node-id="1:45630" data-name="Project Showcase Wrapper">
-            <div className="group absolute inset-0 pointer-events-auto overflow-hidden">
-              {projects[idx].image ? (
-                <img
-                  src={projects[idx].image}
-                  alt={projects[idx].name}
-                  className="size-full object-cover object-top select-none transition-transform duration-300 group-hover:scale-[1.02]"
-                />
-              ) : (
-                <div className="size-full flex items-center justify-center bg-white text-gray-300 font-['Poppins:Bold'] text-2xl">
-                  [ Image Placeholder ]
-                </div>
-              )}
 
-              {/* Minimalist Blue Hover Overlay */}
-              <div className="absolute inset-0 z-10 flex items-center justify-center gap-[14px] bg-[#02007f]/70 backdrop-blur-[2px] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                <a
-                  href={projects[idx].live || projects[idx].github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group/btn relative px-[16px] py-[6px] bg-white text-[#02007f] font-['Pixelify_Sans:Regular'] text-[17px] tracking-wide shadow-[0px_2px_8px_rgba(0,0,0,0.3)] hover:bg-[#ffcc2a] hover:text-black transition-all duration-150 flex items-center gap-[6px] active:translate-y-[1px]"
-                >
-                  <span>View Live Website</span>
-                  <span className="text-[14px] transition-transform duration-150 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">↗</span>
-                </a>
-                <a
-                  href={projects[idx].github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group/btn relative px-[16px] py-[6px] bg-black/40 hover:bg-black/60 border border-white/70 text-white font-['Pixelify_Sans:Regular'] text-[17px] tracking-wide shadow-[0px_2px_8px_rgba(0,0,0,0.3)] backdrop-blur-sm transition-all duration-150 flex items-center gap-[6px] active:translate-y-[1px]"
-                >
-                  <span>View Repository</span>
-                  <span className="text-[14px] transition-transform duration-150 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">↗</span>
-                </a>
+          {/* External Nav Arrows (sitting left and right outside the window) */}
+          <div className="pointer-events-auto absolute contents left-[78px] top-[540px]" data-node-id="1:45623" data-name="Nav Arrow">
+            <div role="button" aria-label="Next project" onClick={() => step(1)} className="absolute contents cursor-pointer left-[1382px] top-[540px]" data-node-id="1:45624">
+              <div className="absolute border border-black border-solid h-[50px] left-[1382px] pointer-events-auto shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[540px] w-[50px] flex items-center justify-center bg-[#d9d9d9] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]">
+                <span className="font-['Poppins:Bold'] text-[24px] text-black select-none">&gt;</span>
               </div>
-
-              <div className="pointer-events-none absolute inset-0 z-20 shadow-[inset_2px_2px_0px_0px_#262626,inset_-2px_-2px_0px_0px_#f0f0f0,inset_4px_4px_0px_0px_#7e7e7e]" />
+            </div>
+            <div role="button" aria-label="Previous project" onClick={() => step(-1)} className="absolute contents cursor-pointer left-[78px] top-[540px]" data-node-id="1:45627">
+              <div className="absolute border border-black border-solid h-[50px] left-[78px] pointer-events-auto shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] top-[540px] w-[50px] flex items-center justify-center bg-[#d9d9d9] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)]">
+                <span className="font-['Poppins:Bold'] text-[24px] text-black select-none">&lt;</span>
+              </div>
             </div>
           </div>
         </div>
