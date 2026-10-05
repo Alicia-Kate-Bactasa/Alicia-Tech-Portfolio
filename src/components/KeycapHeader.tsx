@@ -1,4 +1,5 @@
-import NavLinks from "./NavLinks";
+import NavLinks from "./NavLinks"
+import { assetUrl } from "../utils/asset"
 
 export default function KeycapHeader() {
   return (
@@ -8,10 +9,10 @@ export default function KeycapHeader() {
     >
       <NavLinks />
       <img
-        src="/assets/LightCase.svg"
+        src={assetUrl("assets/LightCase.svg")}
         alt=""
         className="absolute left-0 top-0 w-[1024px] h-[300px] max-w-none block pointer-events-none"
       />
     </div>
-  );
+  )
 }

@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState } from "react"
+import { assetUrl } from "../utils/asset"
 
-const A = "/assets";
-const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
-const icon = (slug: string, v = "original") => `${DEV}/${slug}/${slug}-${v}.svg`;
-const blue = "rgba(8,0,255,0.6)";
+const A = assetUrl("assets", false)
+const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons"
+const icon = (slug: string, v = "original") => `${DEV}/${slug}/${slug}-${v}.svg`
+const blue = "rgba(8,0,255,0.6)"
 
-type Item = [string, string | null];
+type Item = [string, string | null]
 
 const languages: Item[] = [
   ["TypeScript", icon("typescript")],
@@ -19,7 +20,7 @@ const languages: Item[] = [
   ["HTML5", icon("html5")],
   ["CSS3", icon("css3")],
   ["Bash", icon("bash")],
-];
+]
 
 const frameworks: Item[] = [
   ["React", icon("react")],
@@ -36,7 +37,7 @@ const frameworks: Item[] = [
   ["Git", icon("git")],
   ["GitHub", icon("github")],
   ["Figma", icon("figma")],
-];
+]
 
 const backend: Item[] = [
   ["PostgreSQL", icon("postgresql")],
@@ -48,15 +49,18 @@ const backend: Item[] = [
   ["REST APIs", null],
   ["MySQL", icon("mysql")],
   ["MongoDB", icon("mongodb")],
-];
+]
 
 const ai: Item[] = [
   ["Claude Code", "https://www.google.com/s2/favicons?sz=64&domain=claude.ai"],
-  ["GitHub Copilot", "https://www.google.com/s2/favicons?sz=64&domain=github.com"],
+  [
+    "GitHub Copilot",
+    "https://www.google.com/s2/favicons?sz=64&domain=github.com",
+  ],
   ["Codex", "https://www.google.com/s2/favicons?sz=64&domain=openai.com"],
-];
+]
 
-const TOTAL = languages.length + frameworks.length + backend.length + ai.length;
+const TOTAL = languages.length + frameworks.length + backend.length + ai.length
 
 function Group({
   title,
@@ -66,36 +70,54 @@ function Group({
   startIndex,
   activeCount,
 }: {
-  title: string;
-  note?: string;
-  items: Item[];
-  glyph: string;
-  startIndex: number;
-  activeCount: number;
+  title: string
+  note?: string
+  items: Item[]
+  glyph: string
+  startIndex: number
+  activeCount: number
 }) {
   return (
     <section className="w-full">
       <div className="mb-[8px] flex items-center gap-[10px] pl-[6px]">
         <img alt="" src={glyph} className="h-[24px] w-[28px] object-contain" />
-        <h2 className="font-['Poppins:Regular'] text-[clamp(17px,4.8vw,20px)] font-normal tracking-[1px]" style={{ color: blue }}>
+        <h2
+          className="font-['Poppins:Regular'] text-[clamp(17px,4.8vw,20px)] font-normal tracking-[1px]"
+          style={{ color: blue }}
+        >
           {title}
         </h2>
       </div>
       <div className="relative p-[18px] sm:p-[28px]">
-        <div className="pointer-events-none absolute inset-[10px] border-2 border-dashed" style={{ borderColor: blue }} />
-        {["left-[4px] top-[4px]", "right-[4px] top-[4px]", "left-[4px] bottom-[4px]", "right-[4px] bottom-[4px]"].map((pos) => (
-          <span key={pos} className={`pointer-events-none absolute size-[18px] border-4 ${pos}`} style={{ background: blue, borderColor: blue }} />
+        <div
+          className="pointer-events-none absolute inset-[10px] border-2 border-dashed"
+          style={{ borderColor: blue }}
+        />
+        {[
+          "left-[4px] top-[4px]",
+          "right-[4px] top-[4px]",
+          "left-[4px] bottom-[4px]",
+          "right-[4px] bottom-[4px]",
+        ].map((pos) => (
+          <span
+            key={pos}
+            className={`pointer-events-none absolute size-[18px] border-4 ${pos}`}
+            style={{ background: blue, borderColor: blue }}
+          />
         ))}
         <div className="relative px-[4px] py-[4px]">
           {note && (
-            <p className="mb-[12px] font-['Poppins:Regular'] text-[13.5px] tracking-[0.5px]" style={{ color: blue }}>
+            <p
+              className="mb-[12px] font-['Poppins:Regular'] text-[13.5px] tracking-[0.5px]"
+              style={{ color: blue }}
+            >
               {note}
             </p>
           )}
           <ul className="flex flex-wrap content-start gap-[8px] sm:gap-[10px]">
             {items.map(([t, src], i) => {
-              const globalIdx = startIndex + i;
-              const isFilled = globalIdx < activeCount;
+              const globalIdx = startIndex + i
+              const isFilled = globalIdx < activeCount
 
               return (
                 <li
@@ -116,22 +138,25 @@ function Group({
                   )}
                   <span>{t}</span>
                 </li>
-              );
+              )
             })}
           </ul>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 export default function TechM() {
   // Start with all technologies filled up to Codex by default
-  const [level, setLevel] = useState(TOTAL);
+  const [level, setLevel] = useState(TOTAL)
 
   return (
     <main className="relative mx-auto max-w-[900px] overflow-x-clip px-[clamp(12px,4vw,40px)] pb-[48px] pt-[clamp(20px,6vw,44px)]">
-      <h1 className="mb-[clamp(18px,5vw,36px)] origin-left rotate-[0.29deg] font-['Poppins:Black'] text-[clamp(38px,12vw,72px)] font-normal leading-[1.1] tracking-[0.05em]" style={{ color: blue }}>
+      <h1
+        className="mb-[clamp(18px,5vw,36px)] origin-left rotate-[0.29deg] font-['Poppins:Black'] text-[clamp(38px,12vw,72px)] font-normal leading-[1.1] tracking-[0.05em]"
+        style={{ color: blue }}
+      >
         My Tech Stack
       </h1>
 
@@ -172,7 +197,10 @@ export default function TechM() {
       {/* Adjust Me Slider - Fills Each Technology Container Sequentially */}
       <div className="mt-[28px] rounded-[25px] bg-[#ffd000] px-[18px] pb-[14px] pt-[10px]">
         <div className="mb-[6px] flex items-center justify-between">
-          <p className="font-['Poppins:Regular'] text-[clamp(16px,4.6vw,20px)] tracking-[1px]" style={{ color: blue }}>
+          <p
+            className="font-['Poppins:Regular'] text-[clamp(16px,4.6vw,20px)] tracking-[1px]"
+            style={{ color: blue }}
+          >
             Adjust me!
           </p>
           <span className="font-['Poppins:Medium'] text-[13px] text-[rgba(8,0,255,0.85)]">
@@ -186,9 +214,17 @@ export default function TechM() {
             style={{ width: `${(level / TOTAL) * 100}%` }}
           >
             <div className="absolute right-[-6px] top-1/2 flex size-[12px] -translate-y-1/2 items-center justify-center">
-              <img alt="" src={`${A}/9b7f6.svg`} className="absolute inset-[-25%_-42%_-58%_-42%] h-[183%] w-[184%] max-w-none" />
+              <img
+                alt=""
+                src={`${A}/9b7f6.svg`}
+                className="absolute inset-[-25%_-42%_-58%_-42%] h-[183%] w-[184%] max-w-none"
+              />
               <span className="absolute bottom-[15px] right-[-7px] flex h-[24px] w-[26px] items-center justify-center font-['Inter:Regular'] text-[12px] text-white">
-                <img alt="" src={`${A}/13fd3.svg`} className="absolute inset-0 h-full w-full" />
+                <img
+                  alt=""
+                  src={`${A}/13fd3.svg`}
+                  className="absolute inset-0 h-full w-full"
+                />
                 <span className="relative">↔</span>
               </span>
             </div>
@@ -206,5 +242,5 @@ export default function TechM() {
         </div>
       </div>
     </main>
-  );
+  )
 }

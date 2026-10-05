@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { navigate } from "../router";
-import { playKeySound } from "../utils/keySound";
+import { useState } from "react"
+import { navigate } from "../router"
+import { playKeySound } from "../utils/keySound"
+import { assetUrl } from "../utils/asset"
 
-const A = "/assets";
-const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
+const A = assetUrl("assets", false)
+const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons"
 
 const tiles = [
   { c: "bg-[#ff3ba0]", r: "rounded-tl-[24px]" },
@@ -12,7 +13,7 @@ const tiles = [
   { c: "bg-[#9a94bf]", r: "" },
   { c: "bg-[#ff3ba0]", r: "" },
   { c: "bg-[#b7d9e1]", r: "rounded-br-[24px]" },
-];
+]
 
 const pillars = [
   {
@@ -36,7 +37,7 @@ const pillars = [
     border: "border-[#857eb1]/50",
     accent: "text-[#585186]",
   },
-];
+]
 
 const coreTechnologies = [
   { name: "TypeScript", icon: `${DEV}/typescript/typescript-original.svg` },
@@ -47,16 +48,16 @@ const coreTechnologies = [
   { name: ".NET", icon: `${DEV}/dotnetcore/dotnetcore-original.svg` },
   { name: "Tailwind CSS", icon: `${DEV}/tailwindcss/tailwindcss-original.svg` },
   { name: "Docker", icon: `${DEV}/docker/docker-original.svg` },
-];
+]
 
 export default function HomeM() {
-  const [bouncingIshie, setBouncingIshie] = useState<number | null>(null);
+  const [bouncingIshie, setBouncingIshie] = useState<number | null>(null)
 
   const tapIshie = (index: number) => {
-    playKeySound(index);
-    setBouncingIshie(index);
-    setTimeout(() => setBouncingIshie(null), 350);
-  };
+    playKeySound(index)
+    setBouncingIshie(index)
+    setTimeout(() => setBouncingIshie(null), 350)
+  }
 
   return (
     <main className="relative mx-auto flex max-w-[900px] flex-col gap-[clamp(24px,6vw,40px)] overflow-hidden px-[clamp(16px,5vw,48px)] pb-[clamp(44px,10vw,72px)] pt-[clamp(20px,5vw,40px)]">
@@ -74,7 +75,9 @@ export default function HomeM() {
             <div
               key={i}
               className={`relative aspect-[248/241] overflow-hidden rounded-[16px] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.04)] ${t.c} ${t.r} ${
-                i === 1 || i === 4 ? "border border-[#27abd3]/40" : "border border-black/[0.04]"
+                i === 1 || i === 4
+                  ? "border border-[#27abd3]/40"
+                  : "border border-black/[0.04]"
               }`}
             />
           ))}
@@ -85,7 +88,9 @@ export default function HomeM() {
             onClick={() => tapIshie(0)}
             aria-label="Character Sprite 1"
             className={`pointer-events-auto absolute bottom-[8px] left-[3%] h-[74%] w-auto max-w-none cursor-pointer border-none bg-transparent p-0 transition-transform duration-200 sm:bottom-[10px] sm:h-[76%] ${
-              bouncingIshie === 0 ? "scale-110 -translate-y-2" : "hover:scale-105 active:scale-95"
+              bouncingIshie === 0
+                ? "scale-110 -translate-y-2"
+                : "hover:scale-105 active:scale-95"
             }`}
           >
             <img
@@ -100,7 +105,9 @@ export default function HomeM() {
             onClick={() => tapIshie(1)}
             aria-label="Character Sprite 2"
             className={`pointer-events-auto absolute bottom-[8px] left-1/2 h-[70%] w-auto max-w-none -translate-x-1/2 cursor-pointer border-none bg-transparent p-0 transition-transform duration-200 sm:bottom-[10px] sm:h-[72%] ${
-              bouncingIshie === 1 ? "scale-110 -translate-y-2 -translate-x-1/2" : "hover:scale-105 active:scale-95"
+              bouncingIshie === 1
+                ? "scale-110 -translate-y-2 -translate-x-1/2"
+                : "hover:scale-105 active:scale-95"
             }`}
           >
             <img
@@ -115,7 +122,9 @@ export default function HomeM() {
             onClick={() => tapIshie(2)}
             aria-label="Character Sprite 3"
             className={`pointer-events-auto absolute bottom-[8px] right-[3%] h-[74%] w-auto max-w-none cursor-pointer border-none bg-transparent p-0 transition-transform duration-200 sm:bottom-[10px] sm:h-[76%] ${
-              bouncingIshie === 2 ? "scale-110 -translate-y-2" : "hover:scale-105 active:scale-95"
+              bouncingIshie === 2
+                ? "scale-110 -translate-y-2"
+                : "hover:scale-105 active:scale-95"
             }`}
           >
             <img
@@ -130,14 +139,20 @@ export default function HomeM() {
       {/* Hero Headline and Bio */}
       <div className="relative">
         <h1 className="font-['Poppins:Light'] font-normal not-italic text-[rgba(8,0,255,0.61)]">
-          <span className="block text-[clamp(32px,11.5vw,92px)] leading-[1.12]">ALICIA KATE</span>
+          <span className="block text-[clamp(32px,11.5vw,92px)] leading-[1.12]">
+            ALICIA KATE
+          </span>
           <span className="block font-['Poppins:ExtraBold'] text-[clamp(40px,15vw,126px)] leading-[1.02]">
             BACTASA<span className="text-[1.15em] leading-[0]">.</span>
           </span>
         </h1>
         <p className="mt-[12px] max-w-[640px] font-['Poppins:Light'] text-[clamp(15px,4vw,18px)] leading-[1.65] text-[rgba(8,0,255,0.76)]">
           Third-year Information Technology student at the{" "}
-          <span className="font-['Poppins:Medium'] text-[rgba(8,0,255,0.9)]">University of San Carlos</span> focused on building resilient backend architectures, full-stack systems, and tactile interactive web experiences.
+          <span className="font-['Poppins:Medium'] text-[rgba(8,0,255,0.9)]">
+            University of San Carlos
+          </span>{" "}
+          focused on building resilient backend architectures, full-stack
+          systems, and tactile interactive web experiences.
         </p>
       </div>
 
@@ -146,8 +161,8 @@ export default function HomeM() {
         <button
           type="button"
           onClick={() => {
-            playKeySound(2);
-            navigate("/projects");
+            playKeySound(2)
+            navigate("/projects")
           }}
           className="flex cursor-pointer items-center justify-center gap-[5px] whitespace-nowrap rounded-full bg-[rgba(8,0,255,0.72)] px-[15px] py-[8px] font-['Poppins:Medium'] text-[12.5px] text-[#fffef8] shadow-[0_2px_10px_rgba(8,0,255,0.18)] transition-all duration-150 hover:bg-[rgba(8,0,255,0.88)] active:translate-y-[1px]"
         >
@@ -156,7 +171,7 @@ export default function HomeM() {
         </button>
 
         <a
-          href="/bactasa-resume.pdf"
+          href={assetUrl("bactasa-resume.pdf")}
           target="_blank"
           rel="noreferrer"
           onClick={() => playKeySound(1)}
@@ -168,8 +183,8 @@ export default function HomeM() {
         <button
           type="button"
           onClick={() => {
-            playKeySound(4);
-            navigate("/work");
+            playKeySound(4)
+            navigate("/work")
           }}
           className="flex cursor-pointer items-center justify-center gap-[5px] whitespace-nowrap rounded-full bg-[rgba(8,0,255,0.72)] px-[15px] py-[8px] font-['Poppins:Medium'] text-[12.5px] text-[#fffef8] shadow-[0_2px_10px_rgba(8,0,255,0.18)] transition-all duration-150 hover:bg-[rgba(8,0,255,0.88)] active:translate-y-[1px]"
         >
@@ -184,7 +199,9 @@ export default function HomeM() {
             key={p.title}
             className={`relative overflow-hidden rounded-[20px] border ${p.border} ${p.pillBg} p-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.02)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(0,0,0,0.05)]`}
           >
-            <h3 className={`font-['Poppins:SemiBold'] text-[16px] leading-tight ${p.accent}`}>
+            <h3
+              className={`font-['Poppins:SemiBold'] text-[16px] leading-tight ${p.accent}`}
+            >
               {p.title}
             </h3>
             <p className="mt-[6px] font-['Poppins:Light'] text-[13px] leading-relaxed text-[rgba(8,0,255,0.72)]">
@@ -203,8 +220,8 @@ export default function HomeM() {
           <button
             type="button"
             onClick={() => {
-              playKeySound(3);
-              navigate("/tech");
+              playKeySound(3)
+              navigate("/tech")
             }}
             className="cursor-pointer font-['Poppins:Medium'] text-[12px] text-[rgba(8,0,255,0.7)] hover:underline"
           >
@@ -229,5 +246,5 @@ export default function HomeM() {
         </div>
       </div>
     </main>
-  );
+  )
 }
