@@ -5,7 +5,7 @@ import { CloseGlyph, MinGlyph, PushButton, TitleBtn } from "./WinButton";
 
 const A = "/assets";
 const DEV = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
-const icons: Record<string, string> = { "Next.js": "nextjs/nextjs-original", "TypeScript": "typescript/typescript-original", "Tailwind CSS": "tailwindcss/tailwindcss-original", "Node.js": "nodejs/nodejs-original", "PostgreSQL": "postgresql/postgresql-original", "React": "react/react-original", "Vite": "vitejs/vitejs-original", "C#": "csharp/csharp-original", "Vue.js": "vuejs/vuejs-original", "Express.js": "express/express-original", "React Native": "react/react-original", "Docker": "docker/docker-original", "Prisma ORM": "prisma/prisma-original", "Supabase": "supabase/supabase-original", "ASP.NET Core Web API": "dotnetcore/dotnetcore-original", "Entity Framework Core": "dotnetcore/dotnetcore-original", "Vue Router": "vuejs/vuejs-original" };
+const icons: Record<string, string> = { "Next.js": "nextjs/nextjs-original", "TypeScript": "typescript/typescript-original", "Tailwind CSS": "tailwindcss/tailwindcss-original", "Node.js": "nodejs/nodejs-original", "PostgreSQL": "postgresql/postgresql-original", "React": "react/react-original", "Vite": "vitejs/vitejs-original", "C#": "csharp/csharp-original", "Vue.js": "vuejs/vuejs-original", "Express.js": "express/express-original", "React Native": "react/react-original", "Docker": "docker/docker-original", "Prisma ORM": "prisma/prisma-original", "Supabase": "supabase/supabase-original", "Supabase Auth": "supabase/supabase-original", "ASP.NET Core Web API": "dotnetcore/dotnetcore-original", "Entity Framework Core": "dotnetcore/dotnetcore-original", "Vue Router": "vuejs/vuejs-original" };
 
 const font = "font-['Pixelify_Sans:Regular']";
 const anim = (dir: number) => ({ animation: `${dir > 0 ? "slideNext" : "slidePrev"} 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards` });
@@ -124,7 +124,7 @@ export default function ProjectsM() {
             </div>
 
             <div className="relative grid grid-cols-[1fr] gap-[4px]">
-              <p className={`${font} bg-[#c3c3c3] px-[8px] py-[4px] text-[clamp(16px,4.6vw,22px)] text-black ${sunken}`}>seven featured project(s)</p>
+              <p className={`${font} bg-[#c3c3c3] px-[8px] py-[4px] text-[clamp(16px,4.6vw,22px)] text-black ${sunken}`}>{n} featured project(s)</p>
               <p key={idx} className={`${font} bg-[#c3c3c3] px-[10px] py-[8px] text-[clamp(22px,6.4vw,32px)] leading-[1.1] text-black ${sunken}`}>
                 ({idx + 1}) {p.name}
               </p>

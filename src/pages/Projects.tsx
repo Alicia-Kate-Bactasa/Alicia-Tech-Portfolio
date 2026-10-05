@@ -205,6 +205,16 @@ export const projects: Project[] = [
     features: "Multi-language code execution · Interactive built-in code editor · Syntax highlighting · Standard input and output · Compiler and runtime error display · Language switching · Execution history · Saved code projects · Resource and execution limits · Shareable code snippets",
     integrations: "Code execution API · Authentication · Cloud storage · WebSockets for future real-time collaboration",
     tech: "React · Vite · TypeScript · Tailwind CSS · Monaco Editor · Node.js or ASP.NET Core · PostgreSQL · Docker · Judge0 API · REST API · WebSockets/Socket.IO · JWT Authentication"
+  },
+  {
+    name: "GetHired",
+    image: "/projects/GetHired.png",
+    github: "https://github.com/Alicia-Kate-Bactasa/GetHired",
+    tagline: "Centralized OJT Partner Directory & Mock Interview Platform",
+    desc: "GetHired is a centralized career and practicum platform designed specifically for USC DCISM students seeking OJT placements. Rather than navigating fragmented partner lists, social media posts, and separate job boards, students can explore a standardized directory of industry partners filterable by industry, specialization, IT roles, and location.\n\nBeyond company discovery, GetHired bridges the preparation gap through category-based mock interviews. Students can practice technical, behavioral, and situational questions tailored to specific tracks such as Web Development or Data Analytics, complete multiple-choice and written essay assessments, and receive AI-powered feedback on their responses to build confidence before their actual interviews.",
+    features: "Centralized industry partner directory · Company search and filtering · Specialization & role tags · OJT requirements & location details · Company bookmarking and comparison · Category-based mock interviews · Technical & behavioral question banks · Multiple-choice assessments · Essay-type questions · AI-powered feedback · Student progress tracking · Admin partner & question management",
+    integrations: "AI API for essay evaluation and interview feedback · Supabase Auth for authentication · Cloud database & storage · REST API gateway",
+    tech: "Next.js · React · TypeScript · Tailwind CSS · Node.js · Express.js · PostgreSQL · Supabase · Supabase Auth · REST API · Render"
   }
 ];
 
@@ -537,7 +547,7 @@ export default function Projects() {
             <div className="flex items-center justify-between gap-[8px] px-[6px] py-[4px] shrink-0">
               <div className="h-[28px] px-[10px] bg-[#c3c3c3] shadow-[inset_2px_2px_0px_0px_#7e7e7e,inset_-2px_-2px_0px_0px_#f0f0f0] flex items-center shrink-0">
                 <p className="font-['Poppins:SemiBold'] text-[13px] text-black leading-none">
-                  7 featured project(s)
+                  {projects.length} featured project(s)
                 </p>
               </div>
 
