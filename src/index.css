@@ -1,6 +1,22 @@
 @import 'tailwindcss';
 
 @font-face {
+  font-family: 'Silkscreen';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/silkscreen/v6/m8JXjfVPf62XiF7kO-i9ULQ.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Silkscreen';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/silkscreen/v6/m8JUjfVPf62XiF7kO-i9aAhATms.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Pixelify Sans:Bold";
   font-style: normal;
   font-weight: 700;

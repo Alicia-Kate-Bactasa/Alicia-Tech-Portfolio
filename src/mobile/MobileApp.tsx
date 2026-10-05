@@ -7,12 +7,12 @@ import ProjectsM from "./ProjectsM";
 import TechM from "./TechM";
 import WorkM from "./WorkM";
 
-const keys: { label: string; to: Route; bg: string; fg: string; grow: number }[] = [
-  { label: "Home", to: "/", bg: "#a7d0db", fg: "#376a76", grow: 1 },
-  { label: "About Me", to: "/about", bg: "#ffadce", fg: "#ff4691", grow: 1 },
-  { label: "Featured Projects", to: "/projects", bg: "#009bca", fg: "#c2f1ff", grow: 1 },
-  { label: "Tech Stack", to: "/tech", bg: "#857eb1", fg: "#f1efff", grow: 1 },
-  { label: "Work with Me", to: "/work", bg: "#ffc100", fg: "#ffffff", grow: 1.7 },
+const keys: { label: string; line1?: string; line2?: string; to: Route; bg: string; fg: string; grow: number }[] = [
+  { label: "Home", line1: "Home", to: "/", bg: "#a7d0db", fg: "#376a76", grow: 1 },
+  { label: "About Me", line1: "About", line2: "Me", to: "/about", bg: "#ffadce", fg: "#ff4691", grow: 1.05 },
+  { label: "Featured Projects", line1: "Featured", line2: "Projects", to: "/projects", bg: "#009bca", fg: "#c2f1ff", grow: 1.25 },
+  { label: "Tech Stack", line1: "Tech", line2: "Stack", to: "/tech", bg: "#857eb1", fg: "#f1efff", grow: 1.05 },
+  { label: "Work with Me", line1: "Work with", line2: "Me", to: "/work", bg: "#ffc100", fg: "#ffffff", grow: 1.55 },
 ];
 
 const bgs: Record<Route, string> = {
@@ -26,47 +26,84 @@ const bgs: Record<Route, string> = {
 function KeyNav({ route }: { route: Route }) {
   const [pressed, setPressed] = useState<number | null>(null);
   const release = () => setPressed(null);
+
   return (
-    <nav aria-label="Main" className="sticky top-0 z-40 px-[6px] pt-[6px] sm:px-[14px] sm:pt-[10px]">
-      <div className="rounded-[14px] bg-[#ececec] p-[6px] shadow-[0_6px_18px_rgba(38,38,38,0.18),inset_0_-3px_0_rgba(0,0,0,0.08),inset_0_2px_0_rgba(255,255,255,0.95)] sm:p-[10px]">
-        <div className="flex h-[clamp(62px,17vw,105px)] items-start gap-[clamp(2px,0.5vw,4px)] rounded-[8px] border border-[#2f2f2f]/80 bg-[#1e1e1e] p-[clamp(1px,0.35vw,2px)] shadow-[inset_0px_1px_4px_1px_rgba(0,0,0,0.2)]">
-          {keys.map((k, i) => (
-            <a
-              key={k.to}
-              href={`#${k.to}`}
-              aria-label={k.label}
-              aria-current={route === k.to ? "page" : undefined}
-              onClick={(e) => {
-                e.preventDefault();
-                if (k.to === "/projects" && route === "/projects") {
-                  window.dispatchEvent(new CustomEvent("vibrate-myprojects"));
-                }
-                navigate(k.to);
-              }}
-              onPointerDown={() => {
-                setPressed(i);
-                playKeySound(i);
-              }}
-              onPointerUp={release}
-              onPointerLeave={release}
-              onPointerCancel={release}
-              onKeyDown={(e) => {
-                if (e.key === " " || e.key === "Enter") {
+    <nav aria-label="Main" className="sticky top-0 z-40 px-[4px] pt-[4px] sm:px-[12px] sm:pt-[8px]">
+      <div className="rounded-[13px] bg-[#ececec] p-[4px] shadow-[0_5px_16px_rgba(38,38,38,0.16),inset_0_-2px_0_rgba(0,0,0,0.08),inset_0_2px_0_rgba(255,255,255,0.95)] sm:p-[7px]">
+        {/* Milkier switch plate with minimal 1px padding so keycaps cover virtually all of it */}
+        <div className="flex h-[clamp(72px,19.5vw,110px)] items-stretch gap-[1.5px] rounded-[7px] border border-[#8a8f9f]/40 bg-[#72778a] p-[1px] shadow-[inset_0px_1px_2px_rgba(0,0,0,0.08)]">
+          {keys.map((k, i) => {
+            const isActive = route === k.to;
+            const isDown = pressed === i;
+
+            return (
+              <a
+                key={k.to}
+                href={`#${k.to}`}
+                aria-label={k.label}
+                aria-current={isActive ? "page" : undefined}
+                onClick={(e) => {
                   e.preventDefault();
+                  if (k.to === "/projects" && route === "/projects") {
+                    window.dispatchEvent(new CustomEvent("vibrate-myprojects"));
+                  }
+                  navigate(k.to);
+                }}
+                onPointerDown={() => {
                   setPressed(i);
                   playKeySound(i);
-                }
-              }}
-              onKeyUp={release}
-              onBlur={release}
-              style={{ flexGrow: k.grow, flexBasis: 0, backgroundColor: k.bg, color: k.fg, marginTop: pressed === i ? 2 : 0 }}
-              className="relative flex h-[calc(100%-2px)] min-w-0 cursor-pointer select-none items-center justify-center rounded-[6px] px-[2px] text-center font-['Poppins:Regular'] text-[clamp(11px,2.9vw,16px)] leading-[1.25] transition-[margin-top,box-shadow] duration-75 focus-visible:outline-2 focus-visible:outline-[#0800ff] [touch-action:manipulation] shadow-[inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-2px_3px_rgba(0,0,0,0.18),0_1px_2px_rgba(0,0,0,0.12)]"
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[6px] shadow-[inset_-1px_0px_8px_0px_rgba(0,0,0,0.45)] mix-blend-overlay opacity-80" />
-              <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[42%] rounded-t-[6px] bg-gradient-to-b from-white/35 to-transparent" />
-              <span className="relative px-[2px] [overflow-wrap:anywhere]">{k.label}</span>
-            </a>
-          ))}
+                }}
+                onPointerUp={release}
+                onPointerLeave={release}
+                onPointerCancel={release}
+                onKeyDown={(e) => {
+                  if (e.key === " " || e.key === "Enter") {
+                    e.preventDefault();
+                    setPressed(i);
+                    playKeySound(i);
+                  }
+                }}
+                onKeyUp={release}
+                onBlur={release}
+                style={{
+                  flexGrow: k.grow,
+                  flexBasis: 0,
+                  backgroundColor: k.bg,
+                  color: k.fg,
+                  transform: isDown ? "translateY(2px)" : "translateY(0)",
+                }}
+                className={`relative flex h-full min-w-0 cursor-pointer select-none flex-col items-center justify-center rounded-[5.5px] px-[1px] text-center font-['Silkscreen',monospace] text-[clamp(9.5px,2.55vw,13px)] leading-[1.2] tracking-[0.03em] transition-transform duration-75 focus-visible:outline-2 focus-visible:outline-[#0800ff] [touch-action:manipulation] ${
+                  isActive
+                    ? "shadow-[inset_0_2px_0_rgba(255,255,255,0.85),inset_0_-2px_3px_rgba(0,0,0,0.22),0_2px_4px_rgba(0,0,0,0.18)] ring-1 ring-white/40"
+                    : "shadow-[inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-2px_3px_rgba(0,0,0,0.16),0_1px_2px_rgba(0,0,0,0.1)]"
+                }`}
+              >
+                {/* 3D Keycap bevel & inner shadow overlays */}
+                <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[5.5px] shadow-[inset_-1px_0px_7px_0px_rgba(0,0,0,0.38)] mix-blend-overlay opacity-80" />
+                <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[40%] rounded-t-[5.5px] bg-gradient-to-b from-white/40 to-transparent" />
+
+                {/* Active Keycap Indicator Line at bottom */}
+                {isActive && (
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute bottom-[2px] h-[2.5px] w-[50%] rounded-full bg-current opacity-85"
+                  />
+                )}
+
+                {/* Keycap label */}
+                <span className="relative flex flex-col items-center justify-center px-[1px] [overflow-wrap:anywhere]">
+                  {k.line2 ? (
+                    <>
+                      <span>{k.line1}</span>
+                      <span>{k.line2}</span>
+                    </>
+                  ) : (
+                    <span>{k.line1 || k.label}</span>
+                  )}
+                </span>
+              </a>
+            );
+          })}
         </div>
       </div>
     </nav>

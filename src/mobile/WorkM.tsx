@@ -9,22 +9,36 @@ const links = [
 export default function WorkM() {
   return (
     <main className="mx-auto flex max-w-[900px] flex-col items-center px-[clamp(16px,5vw,48px)] pb-[48px] pt-[clamp(32px,9vw,72px)] text-center">
-      <h1 className={`rotate-[0.29deg] font-['Poppins:Black'] text-[clamp(38px,12.5vw,84px)] font-normal leading-[1.1] tracking-[0.05em] ${c}`}>Work with Me!</h1>
+      <h1 className={`rotate-[0.29deg] font-['Poppins:Black'] text-[clamp(38px,12.5vw,84px)] font-normal leading-[1.1] tracking-[0.05em] ${c}`}>
+        Work with Me!
+      </h1>
 
-      <div className="mt-[clamp(24px,7vw,48px)] flex w-full flex-col items-start gap-[18px] font-['Poppins:Regular'] text-[clamp(17px,5vw,32px)] tracking-[0.05em]">
-        <a href="mailto:bactasa.ak@gmail.com" target="_blank" rel="noreferrer" className={`group flex items-center gap-[12px] rounded-[8px] px-[6px] -mx-[6px] py-[4px] text-left font-['Poppins:SemiBold'] ${c} transition-colors duration-200 hover:bg-white/15 hover:text-[#0200ff]`}>
-          <img alt="" src={`${A}/c158a.svg`} className="w-[clamp(28px,8vw,40px)] shrink-0 transition-transform duration-200 group-hover:scale-105" />
-          <span className="[overflow-wrap:anywhere] transition-colors duration-200 group-hover:text-[#0200ff]">
-            Email Me — <span className="font-['Poppins:Regular']">bactasa.ak@gmail.com</span>
-          </span>
-          <img alt="" src={`${A}/bb561.svg`} className="hidden w-[34px] shrink-0 transition-transform duration-200 group-hover:translate-x-2 sm:block" />
-        </a>
-        {links.map((l) => (
-          <a key={l.name} href={l.href} target="_blank" rel="noreferrer" className={`group flex items-center gap-[12px] rounded-[8px] px-[4px] -mx-[4px] py-[2px] text-left ${c} underline-offset-4 transition-all duration-200 hover:bg-white/15 hover:text-[#0200ff] hover:decoration-2 hover:underline-offset-4 hover:translate-x-[2px]`}>
-            <img alt="" src={l.icon} className="w-[clamp(28px,8vw,40px)] shrink-0 transition-transform duration-200 group-hover:scale-105" />
-            <span className="underline [overflow-wrap:anywhere]">{l.label}</span>
+      <div className="mt-[clamp(28px,8vw,52px)] flex w-full flex-col items-center justify-center gap-[18px] font-['Poppins:Regular'] text-[clamp(17px,5vw,32px)] tracking-[0.05em]">
+        <div className="flex w-full max-w-full flex-col items-center justify-center gap-[18px]">
+          <a
+            href="mailto:bactasa.ak@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+            className={`group flex flex-wrap items-center justify-center gap-[12px] rounded-[8px] px-[8px] py-[4px] text-center font-['Poppins:SemiBold'] ${c} transition-colors duration-200 hover:bg-white/15 hover:text-[#0200ff]`}
+          >
+            <img alt="" src={`${A}/c158a.svg`} className="w-[clamp(28px,8vw,40px)] shrink-0 transition-transform duration-200 group-hover:scale-105" />
+            <span className="text-center [overflow-wrap:anywhere] transition-colors duration-200 group-hover:text-[#0200ff]">
+              Email Me — <span className="font-['Poppins:Regular']">bactasa.ak@gmail.com</span>
+            </span>
           </a>
-        ))}
+          {links.map((l) => (
+            <a
+              key={l.name}
+              href={l.href}
+              target="_blank"
+              rel="noreferrer"
+              className={`group flex items-center justify-center gap-[12px] rounded-[8px] px-[8px] py-[4px] text-center ${c} underline-offset-4 transition-all duration-200 hover:bg-white/15 hover:text-[#0200ff] hover:decoration-2 hover:underline-offset-4 hover:translate-y-[-1px]`}
+            >
+              <img alt="" src={l.icon} className="w-[clamp(28px,8vw,40px)] shrink-0 transition-transform duration-200 group-hover:scale-105" />
+              <span className="text-center underline [overflow-wrap:anywhere]">{l.label}</span>
+            </a>
+          ))}
+        </div>
       </div>
 
       <div className="relative mt-[clamp(40px,12vw,90px)] h-[clamp(110px,34vw,170px)] w-[clamp(220px,66vw,400px)]">
