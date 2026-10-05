@@ -136,6 +136,7 @@ export const projects: Project[] = [
   {
     name: "Dimetrix",
     image: "/projects/Dimetrix.png",
+    live: "https://dimetrix.vercel.app",
     github: "https://github.com/Alicia-Kate-Bactasa/Dimetrix",
     tagline: "Power Outage Mapping & Analytics Platform",
     desc: "Dimetrix is a web-based geographic incident monitoring platform designed to visualize and track power outages, exploded transformers, scheduled brownouts, and other electrical disruptions. Instead of relying on scattered announcements and social media reports, users can access a centralized interactive map showing affected locations and the current status of reported incidents.\n\nBeyond mapping incidents, Dimetrix transforms outage reports into meaningful statistics and visual insights. Users and decision-makers can identify frequently affected areas, analyze recurring incidents, monitor outage trends, and better understand patterns in electrical disruptions over time.",
@@ -166,6 +167,7 @@ export const projects: Project[] = [
   {
     name: "Noir Detailing",
     image: "/projects/NoirDetailing.png",
+    live: "https://montage-studio.dcism.org/",
     github: "https://github.com/Alicia-Kate-Bactasa/Carwash-Booking-System",
     tagline: "Carwash Booking & Subscription Management System",
     desc: "Noir Detailing is a carwash booking and management platform that supports both one-time service appointments and subscription-based memberships. Customers can select detailing services, register their vehicles, choose available schedules, and manage bookings through a centralized system.\n\nThe platform also helps administrators manage appointment schedules, service capacity, customer records, subscriptions, and booking activity. Business rules such as available operating hours, bay allocation, and booking limits can be integrated into the scheduling system to prevent overbooking.",
@@ -186,6 +188,7 @@ export const projects: Project[] = [
   {
     name: "DriveGo",
     image: "/projects/DriveGo.png",
+    live: "https://drivego-hub.vercel.app",
     github: "https://github.com/Alicia-Kate-Bactasa/DriveGo",
     tagline: "Centralized Donation Drive Discovery Platform",
     desc: "DriveGo is a centralized platform designed to make donation drives easier to discover, access, and manage. Instead of campaigns being scattered across different social media platforms, messaging applications, and organization pages, DriveGo provides a single system where organizations can publish and manage donation campaigns. Users can explore active donation drives, view campaign details and accepted donation requirements, discover nearby initiatives, and follow updates from organizers. The platform can also provide campaign statistics and progress tracking to make donation efforts more transparent and accessible.",
