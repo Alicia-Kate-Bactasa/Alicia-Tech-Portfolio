@@ -28,8 +28,22 @@ const icons: Record<string, string> = {
   Supabase: "supabase/supabase-original",
   "Supabase Auth": "supabase/supabase-original",
   "ASP.NET Core Web API": "dotnetcore/dotnetcore-original",
+  "ASP.NET Core": "dotnetcore/dotnetcore-original",
+  ".NET": "dotnetcore/dotnetcore-original",
   "Entity Framework Core": "dotnetcore/dotnetcore-original",
+  Postman: "postman/postman-original",
   "Vue Router": "vuejs/vuejs-original",
+  Expo: "expo/expo-original",
+  "Expo Router": "expo/expo-original",
+  "Expo Haptics": "expo/expo-original",
+  "React Native Reanimated": "react/react-original",
+  JavaScript: "javascript/javascript-original",
+  "Microsoft SQL Server": "microsoftsqlserver/microsoftsqlserver-plain",
+  Vercel: "vercel/vercel-original",
+  PGlite: "postgresql/postgresql-original",
+  "Drizzle ORM": "drizzle/drizzle-original",
+  Zustand: "react/react-original",
+  CodeMirror: "vscode/vscode-original",
 }
 
 const font = "font-['Pixelify_Sans:Regular']"

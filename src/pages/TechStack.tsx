@@ -705,7 +705,7 @@ export default function TechStack() {
         />
       </div>
       <div
-        className="absolute flex h-[96.865px] items-center justify-center left-[-122px] top-[189px] w-[566.199px]"
+        className="absolute flex h-[96.865px] items-center justify-start left-[24px] top-[189px] w-[566.199px]"
         data-node-id="1:45665"
       >
         <div className="flex-none rotate-[0.29deg]">
