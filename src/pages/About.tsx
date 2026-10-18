@@ -827,8 +827,13 @@ export default function About() {
         data-name="Resume"
       >
         <p
-          className="-translate-x-1/2 [word-break:break-word] absolute font-['Poppins:Medium'] h-[42.233px] leading-[15px] left-[1376.5px] not-italic text-[15px] text-center text-white top-[949.77px] tracking-[0.75px] w-[149px] transition-colors duration-300 group-hover:text-[#ff1607] [-webkit-text-stroke:1px_black] [paint-order:stroke]"
-          style={{ WebkitTextStroke: "1px black" }}
+          className="-translate-x-1/2 [word-break:break-word] absolute font-['Poppins:Bold'] h-[42.233px] leading-[16px] left-[1376.5px] not-italic text-[16px] text-center text-white top-[949.77px] tracking-[0.75px] w-[160px] transition-colors duration-300 group-hover:text-[#ff1607]"
+          style={{
+            WebkitTextStroke: "3px black",
+            paintOrder: "stroke fill",
+            textShadow:
+              "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 1px 3px rgba(0,0,0,0.7)",
+          }}
           data-node-id="1:45533"
         >
           View Alicia’s Resume
