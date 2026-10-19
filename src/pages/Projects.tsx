@@ -943,20 +943,19 @@ export default function Projects() {
             {/* 2. Menu Bar */}
             <div className="flex items-center justify-between px-[8px] py-[3px] text-[13px] font-['Poppins:Medium'] border-b border-[#7e7e7e] bg-[#c3c3c3] shrink-0">
               <div className="flex items-center gap-[20px]">
-                <button
-                  type="button"
-                  onClick={() =>
-                    window.open(
-                      projects[idx].live || projects[idx].github,
-                      "_blank",
-                    )
-                  }
-                  className="cursor-pointer hover:bg-[#02007f] hover:text-white px-[4px] leading-tight flex items-center gap-[4px]"
-                >
-                  <span>
-                    <span className="underline">V</span>iew Live Website &rarr;
-                  </span>
-                </button>
+                {projects[idx].live && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      window.open(projects[idx].live, "_blank")
+                    }
+                    className="cursor-pointer hover:bg-[#02007f] hover:text-white px-[4px] leading-tight flex items-center gap-[4px]"
+                  >
+                    <span>
+                      <span className="underline">V</span>iew Live Website &rarr;
+                    </span>
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => window.open(projects[idx].github, "_blank")}
@@ -1041,15 +1040,17 @@ export default function Projects() {
 
                   {/* Clean Minimalist Hover Overlay */}
                   <div className="absolute inset-0 z-10 flex items-center justify-center gap-[12px] bg-[#02007f]/75 backdrop-blur-[2px] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                    <a
-                      href={projects[idx].live || projects[idx].github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-[16px] py-[8px] bg-white text-[#02007f] font-['Poppins:SemiBold'] text-[14px] shadow-md hover:bg-[#ffcc2a] hover:text-black transition-all flex items-center gap-[6px] active:translate-y-[1px]"
-                    >
-                      <span>View Live Website</span>
-                      <span>&rarr;</span>
-                    </a>
+                    {projects[idx].live && (
+                      <a
+                        href={projects[idx].live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-[16px] py-[8px] bg-white text-[#02007f] font-['Poppins:SemiBold'] text-[14px] shadow-md hover:bg-[#ffcc2a] hover:text-black transition-all flex items-center gap-[6px] active:translate-y-[1px]"
+                      >
+                        <span>View Live Website</span>
+                        <span>&rarr;</span>
+                      </a>
+                    )}
                     <a
                       href={projects[idx].github}
                       target="_blank"
@@ -1085,15 +1086,17 @@ export default function Projects() {
                   </div>
 
                   <div className="flex items-center gap-[6px]">
-                    <a
-                      href={projects[idx].live || projects[idx].github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="h-[30px] px-[14px] bg-[#02007f] hover:bg-[#0000bb] text-white font-['Poppins:Medium'] text-[13px] shadow-[inset_-1px_-1px_0px_#000,inset_1px_1px_0px_#fff] flex items-center gap-[4px] cursor-pointer active:translate-y-[1px]"
-                    >
-                      <span>Live Website</span>
-                      <span className="text-[11px]">&rarr;</span>
-                    </a>
+                    {projects[idx].live && (
+                      <a
+                        href={projects[idx].live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="h-[30px] px-[14px] bg-[#02007f] hover:bg-[#0000bb] text-white font-['Poppins:Medium'] text-[13px] shadow-[inset_-1px_-1px_0px_#000,inset_1px_1px_0px_#fff] flex items-center gap-[4px] cursor-pointer active:translate-y-[1px]"
+                      >
+                        <span>Live Website</span>
+                        <span className="text-[11px]">&rarr;</span>
+                      </a>
+                    )}
                     <a
                       href={projects[idx].github}
                       target="_blank"
