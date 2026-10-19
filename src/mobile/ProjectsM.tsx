@@ -148,6 +148,7 @@ export default function ProjectsM() {
     setIdx((i) => (i + d + n) % n)
   }
   const github = () => window.open(p.github, "_blank")
+  const live = () => p.live && window.open(p.live, "_blank")
 
   return (
     <main
@@ -209,17 +210,22 @@ export default function ProjectsM() {
             <div
               className={`relative flex flex-wrap gap-x-[20px] gap-y-[2px] px-[8px] py-[8px] ${font} text-[clamp(17px,4.8vw,24px)] text-black`}
             >
-              {["View Live Website", "View Github"].map((t) => (
+              {p.live && (
                 <button
-                  key={t}
                   type="button"
-                  onClick={github}
+                  onClick={live}
                   className="cursor-pointer leading-[1.2] hover:bg-[#02007f] hover:text-white"
                 >
-                  <span className="underline">V</span>
-                  {t.slice(1)}
+                  <span className="underline">V</span>iew Live Website
                 </button>
-              ))}
+              )}
+              <button
+                type="button"
+                onClick={github}
+                className="cursor-pointer leading-[1.2] hover:bg-[#02007f] hover:text-white"
+              >
+                <span className="underline">V</span>iew Github
+              </button>
             </div>
 
             <div className="relative grid grid-cols-[1fr] gap-[4px]">
@@ -263,15 +269,17 @@ export default function ProjectsM() {
                 )}
                 {/* Minimalist Blue Overlay */}
                 <div className="absolute inset-0 z-10 flex flex-col sm:flex-row items-center justify-center gap-[8px] bg-[#02007f]/70 backdrop-blur-[2px] opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100">
-                  <a
-                    href={p.live || p.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-[12px] py-[5px] bg-white text-[#02007f] font-['Pixelify_Sans:Regular'] text-[15px] shadow-sm flex items-center gap-[5px] active:scale-95 transition-transform"
-                  >
-                    <span>View Live Website</span>
-                    <span className="text-[12px]">↗</span>
-                  </a>
+                  {p.live && (
+                    <a
+                      href={p.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-[12px] py-[5px] bg-white text-[#02007f] font-['Pixelify_Sans:Regular'] text-[15px] shadow-sm flex items-center gap-[5px] active:scale-95 transition-transform"
+                    >
+                      <span>View Live Website</span>
+                      <span className="text-[12px]">↗</span>
+                    </a>
+                  )}
                   <a
                     href={p.github}
                     target="_blank"
