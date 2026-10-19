@@ -197,7 +197,7 @@ export const projects: Project[] = [
     tech: "Next.js · React · TypeScript · Tailwind CSS · Node.js · PostgreSQL · Neon Serverless · Prisma ORM · Leaflet · Upstash Redis · Recharts",
   },
   {
-    name: "Caytori",
+    name: " (Ongoing) Caytori",
     image: assetUrl("projects/caytori.png"),
     github: "https://github.com/Alicia-Kate-Bactasa/Caytori",
     tagline: "IT Services Ticketing & Support Management Platform",
@@ -259,7 +259,7 @@ export const projects: Project[] = [
     tech: "Next.js · React · TypeScript · Tailwind CSS · Supabase · Prisma ORM · PostgreSQL · Vercel",
   },
   {
-    name: "ExecSpace",
+    name: "(Ongoing) ExecSpace",
     image: assetUrl("projects/exec-space.png"),
     github: "https://github.com/Alicia-Kate-Bactasa/Exec-Space",
     tagline: "Minimalist Database Investigation Playground for Students",
