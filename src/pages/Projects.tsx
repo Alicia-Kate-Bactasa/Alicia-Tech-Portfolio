@@ -234,7 +234,7 @@ export const projects: Project[] = [
     tech: "Vue.js · Vite · JavaScript · Tailwind CSS · Node.js · Express.js · Prisma ORM · PostgreSQL · Neon",
   },
   {
-    name: "Lumen",
+    name: "(Ongoing) Lumen",
     image: assetUrl("projects/lumen.png"),
     github: "https://github.com/Alicia-Kate-Bactasa/Lumen",
     tagline: "Specialty Tea & Ceremonial Matcha Storefront",
