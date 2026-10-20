@@ -31,8 +31,8 @@ const pillars = [
     accent: "text-[#d83577]",
   },
   {
-    title: "Data Analytics",
-    desc: "Data modeling, backend data analytics & structured insights",
+    title: "Cybersecurity",
+    desc: "Network security fundamentals, secure coding principles & active learning",
     pillBg: "bg-[#857eb1]/20",
     border: "border-[#857eb1]/50",
     accent: "text-[#585186]",
