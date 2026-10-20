@@ -13,7 +13,7 @@ const links = [
   {
     icon: `${A}/0ae47.svg`,
     label: "Alicia Kate Bactasa",
-    href: "https://www.linkedin.com/in/alicia-kate-bactasa",
+    href: "www.linkedin.com/in/alicia-kate-bactasa-517441355",
     name: "LinkedIn",
   },
 ]
