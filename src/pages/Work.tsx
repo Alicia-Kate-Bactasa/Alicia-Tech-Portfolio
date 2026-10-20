@@ -567,7 +567,7 @@ export default function Work() {
             data-node-id="1:45734"
           >
             <a
-              href="www.linkedin.com/in/alicia-kate-bactasa-517441355"
+              href="https://www.linkedin.com/in/alicia-kate-bactasa-517441355"
               target="_blank"
               rel="noreferrer"
               className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute cursor-pointer decoration-from-font decoration-solid font-['Poppins:Regular'] h-[50px] leading-[normal] left-[564px] not-italic text-[32px] text-[rgba(8,0,255,0.74)] top-[443px] tracking-[1.6px] underline w-[357px] transition-all duration-200 hover:bg-white/15 hover:text-[#0200ff] hover:decoration-2 hover:underline-offset-4 hover:translate-x-[2px] rounded-[6px] px-[4px] -mx-[4px]"
