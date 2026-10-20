@@ -11,7 +11,7 @@
  */
 
 // Bump this version string whenever assets are updated to guarantee immediate fresh loads
-export const ASSET_VERSION = "20261005_v3"
+export const ASSET_VERSION = "20261021_v1"
 
 export function assetUrl(path: string, bustCache = true): string {
   if (!path) return ""
