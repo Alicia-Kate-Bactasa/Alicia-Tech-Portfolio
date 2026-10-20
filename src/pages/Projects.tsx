@@ -223,7 +223,7 @@ export const projects: Project[] = [
   {
     name: "Noir Detailing",
     image: assetUrl("projects/NoirDetailing.png"),
-    live: "https://montage-studio.dcism.org/",
+    live: "https://noir-detailing.dcism.org/",
     github: "https://github.com/Alicia-Kate-Bactasa/Carwash-Booking-System",
     tagline: "Auto Detailing Reservation & VIP Membership Platform",
     desc: "Noir Detailing is a full-stack auto detailing reservation and VIP membership subscription web application built with an Express.js backend and Vue.js 3 frontend, powered by Prisma ORM and Neon PostgreSQL database integration.\n\nThe platform offers structured auto detailing scheduling and membership management with distinct workflows: a Guest Booking Wizard for walk-ins to browse active packages, select service durations, and check studio bay availability in real time; a VIP Subscriber Hub enabling members to book complimentary detailing sessions with 0 PHP per-session transaction invoices and manage billing cycles; an Admin Management Control panel for package CRUD, walk-in management, and analytics; and an automated HTML email service for transaction invoicing and appointment notifications.",
