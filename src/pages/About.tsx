@@ -792,7 +792,7 @@ export default function About() {
           </div>
         </div>
         <div
-          className="absolute left-[906px] top-[242px] flex w-[calc(557px+var(--yellow-right-extend,0px))] justify-center px-[20px] font-['Poppins:Light'] text-[20px] leading-[normal] tracking-[1px] text-[rgba(8,0,255,0.75)] [&_p]:transition-colors [&_p]:duration-300 hover:[&_p]:text-[#d4d422]"
+          className="absolute left-[906px] top-[230px] flex w-[calc(557px+var(--yellow-right-extend,0px))] justify-center px-[20px] font-['Poppins:Light'] text-[20px] leading-[normal] tracking-[1px] text-[rgba(8,0,255,0.75)] [&_p]:transition-colors [&_p]:duration-300 hover:[&_p]:text-[#d4d422]"
           data-node-id="1:45527"
           data-name="Offered"
         >
@@ -811,7 +811,7 @@ export default function About() {
             </p>
             <p className="text-left" data-node-id="1:45530">
               <span className="font-['Poppins:ExtraBold']">|</span>
-              <span>{` Backend architecture & exploring cybersecurity`}</span>
+              <span>{` Backend architecture`}</span>
             </p>
           </div>
         </div>
