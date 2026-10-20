@@ -678,7 +678,7 @@ export default function About() {
           </span>
           <span className="font-['Poppins:Medium'] leading-[normal] text-[16px]">{` University of San Carlos`}</span>
           <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">{` with a technical focus on`}</span>
-          <span className="font-['Poppins:Medium'] leading-[normal] text-[16px]">{` back-end engineering, database development, and data analytics`}</span>
+          <span className="font-['Poppins:Medium'] leading-[normal] text-[16px]">{` back-end engineering and database development`}</span>
           <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">
             .
           </span>
@@ -687,10 +687,9 @@ export default function About() {
           className="-translate-x-full [word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[143px] leading-[0] left-[820px] not-italic text-[0px] text-[rgba(8,0,255,0.75)] text-right top-[328px] tracking-[0.8px] w-[413px] transition-all duration-300 hover:text-[#d4d422] hover:scale-[1.02]"
           data-node-id="1:45517"
         >
-          <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">{`I enjoy turning ideas into functional, well-structured applications while continuously exploring new technologies. Most of my experience comes from `}</span>
+          <span className="font-['Poppins:Light'] leading-[normal] text-[16px]">{`I enjoy turning ideas into functional, well-structured applications. While my core projects center on full-stack web systems and databases, I am also `}</span>
           <span className="font-['Poppins:Medium'] leading-[normal] text-[16px]">
-            hands-on projects, collaborative development, and building
-            full-stack systems from the ground up.
+            actively learning cybersecurity fundamentals to build safer, more resilient software.
           </span>
         </p>
         <div
@@ -812,7 +811,7 @@ export default function About() {
             </p>
             <p className="text-left" data-node-id="1:45530">
               <span className="font-['Poppins:ExtraBold']">|</span>
-              <span>{` Data analytics & backend architecture`}</span>
+              <span>{` Backend architecture & exploring cybersecurity`}</span>
             </p>
           </div>
         </div>

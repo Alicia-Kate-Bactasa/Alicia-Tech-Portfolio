@@ -10,7 +10,7 @@ const offered = [
   "Database Development & Schema Design",
   "Full-stack Web & Mobile Applications",
   "UI/UX Design & Frontend Integration",
-  "Data Analytics & Backend Architecture",
+  "Backend Architecture & Exploring Cybersecurity",
 ]
 
 const coursework = [
@@ -30,7 +30,7 @@ const quickInfo = [
   { label: "Location", val: "Cebu City, Philippines" },
   {
     label: "Focus",
-    val: "Full Stack Development, Database Development, Data Analytics",
+    val: "Full Stack Development, Database Development, Cybersecurity",
   },
 ]
 
@@ -75,17 +75,17 @@ export default function AboutM() {
             </b>{" "}
             with a technical focus on{" "}
             <b className="font-['Poppins:Medium'] font-normal">
-              back-end engineering, database development, and data analytics
+              back-end engineering and database development
             </b>
             .
           </p>
           <p className="text-justify text-[16px] font-['Poppins:Light'] leading-[1.65] transition-all duration-300 hover:scale-[1.01] hover:text-[#d4d422]">
-            I enjoy turning ideas into functional, well-structured applications
-            while continuously exploring new technologies. Most of my experience
-            comes from{" "}
+            I enjoy turning ideas into functional, well-structured applications.
+            While my core projects center on full-stack web systems and
+            databases, I am also{" "}
             <b className="font-['Poppins:Medium'] font-normal">
-              hands-on projects, collaborative development, and building
-              full-stack systems from the ground up.
+              actively learning cybersecurity fundamentals to build safer, more
+              resilient software.
             </b>
           </p>
         </div>
